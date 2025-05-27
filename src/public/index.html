@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EGiB GML</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="clusterize.css" />
+    <link rel="stylesheet" href="easy-button.css" />
+    <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> -->
+  </head>
+  <body>
+    <h1>EGiB GML</h1>
+    <div id="flex-container">
+      <div id="drop-area">
+        <input type="file" accept=".gml" id="file-input" name="gml" required />
+        <div id="file-name">Kliknij aby wybrać plik gml lub przeciągnij go i upuść.</div>
+      </div>
+    </div>
+    <div id="upload-progress">...</div>
+    <div id="show-info" class="cursor-pointer">?</div>
+    <div id="modal" style="display: none">
+      <div id="fixed-bar">
+        <div id="grid-container-bar">
+          <button id="left-button" class="button-narrow"><</button>
+          <button id="right-button" class="button-narrow">></button>
+          <button id="show-on-map" class="button-wide">Pokaż na mapie</button>
+          <button id="report" class="button-wide">Raport</button>
+          <!-- <div></div> -->
+          <button id="show-table" class="button-wide">Tabela</button>
+          <button id="close-modal-button" class="button-narrow">X</button>
+        </div>
+      </div>
+      <div id="main-wrapper" class="container"></div>
+    </div>
+    <dialog id="table-dialog">
+      <div id="dialog-wrapper">
+        <div id="table-fixed-bar">
+          <div id="table-grid-container-bar">
+            <select id="select-features">
+              <option value="">- Wybierz -</option>
+            </select>
+            <form id="table-filter-form" action="">
+              <input type="text" id="table-filter" placeholder="Filtruj..." />
+              <button type="submit">Filtruj</button>
+            </form>
+            <button id="close-table" class="button-narrow">X</button>
+          </div>
+        </div>
+        <div class="clusterize table-wrapper">
+          <div id="scrollArea" class="clusterize-scroll table-scroll">
+            <table>
+              <colgroup id="clusterize-colgroup"></colgroup>
+              <thead id="clusterize-thead"></thead>
+              <tbody id="contentArea" class="clusterize-content"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </dialog>
+    <dialog id="info-dialog">
+      <div id="dialog-wrapper">
+        <div class="info-bar">
+          <a href="https://github.com/char11/egib-gml">https://github.com/char11/egib-gml</a>
+          <button id="close-info" class="button-narrow">X</button>
+        </div>
+        <div id="info-wrapper">
+          <div>Wykorzystano:</div>
+          <div>
+            <a href="https://github.com/oven-sh/bun">https://github.com/oven-sh/bun</a> -
+            <a href="https://github.com/oven-sh/bun/blob/main/LICENSE.md">https://github.com/oven-sh/bun/blob/main/LICENSE.md</a>
+          </div>
+          <div><a href="https://github.com/Leaflet/Leaflet">https://github.com/Leaflet/Leaflet</a> - BSD 2-Clause license</div>
+          <div><a href="https://gitee.com/panzhiyue/leaflet-canvas-label">https://gitee.com/panzhiyue/leaflet-canvas-label</a> - MIT license</div>
+          <div>
+            <a href="https://github.com/yakitoritabetai/Leaflet.LabelTextCollision">https://github.com/yakitoritabetai/Leaflet.LabelTextCollision</a> - MIT
+            license
+            <div>
+              <a href="https://github.com/alcalin/L.TileLayer.WMTS">https://github.com/alcalin/L.TileLayer.WMTS</a> -
+              <a href="https://github.com/alcalin/L.TileLayer.WMTS/blob/main/LICENSE">https://github.com/alcalin/L.TileLayer.WMTS/blob/main/LICENSE</a>
+            </div>
+            <div><a href="https://github.com/CliffCloud/Leaflet.EasyButton">https://github.com/CliffCloud/Leaflet.EasyButton</a> - MIT license</div>
+            <div><a href="https://github.com/derhuerst/parse-gml-polygon">https://github.com/derhuerst/parse-gml-polygon</a> - ISC license</div>
+            <div><a href="https://github.com/TobiasNickel/tXml">https://github.com/TobiasNickel/tXml</a> - MIT license</div>
+            <div><a href="https://github.com/NeXTs/Clusterize.js">https://github.com/NeXTs/Clusterize.js</a> - MIT license</div>
+            <div><a href="https://github.com/parallax/jsPDF">https://github.com/parallax/jsPDF</a> - MIT license</div>
+            <div><a href="https://github.com/simonbengtsson/jsPDF-AutoTable">https://github.com/simonbengtsson/jsPDF-AutoTable</a> - MIT license</div>
+            <div><a href="https://github.com/honojs/hono">https://github.com/honojs/hono</a> - MIT license</div>
+            <div>
+              <a href="https://github.com/proj4js/proj4js">https://github.com/proj4js/proj4js</a> -
+              <a href="https://github.com/proj4js/proj4js/blob/master/LICENSE.md">https://github.com/proj4js/proj4js/blob/master/LICENSE.md</a>
+            </div>
+            <div><a href="https://github.com/kartena/Proj4Leaflet">https://github.com/kartena/Proj4Leaflet</a> - BSD 2-Clause license</div>
+            <div><a href="https://github.com/mourner/rbush">https://github.com/mourner/rbush</a> - MIT license</div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+    <div id="map"></div>
+  </body>
+</html>
+<script src="index.js"></script>
