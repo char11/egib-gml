@@ -181,7 +181,7 @@ function getPunktyGraniczne(obj: EGB_DzialkaEwidencyjnaType) {
 }
 
 function getJRG(obj: EGB_DzialkaEwidencyjnaType) {
-	let ret = '<div><span class="item">Jednostka rejestrowa gruntów: </span>';
+	let ret = '<div class="jrg-card"><span class="item">Jednostka rejestrowa gruntów: </span>';
 	// JRG
 	if (obj.JRG2 == null) {
 		ret += '<span class="error-inline">Brak JRG</span>';
@@ -257,19 +257,26 @@ function getEGBZmiany(obj: EGB_DzialkaEwidencyjnaType) {
 }
 
 function getIdBudynkuLokale(obj: EGB_BudynekType) {
-	let ret = '<div class="cursor-pointer" id="' + htmlIDs.iBudynek + obj._attributes.id + '" onclick="showEgbFeature(this.id)">';
+	let ret = '<div class="building-card">';
+	ret += '<div class="building-head"><span class="item">Budynek: </span>';
+	ret += '<span class="bold cursor-pointer" id="' + htmlIDs.iBudynek + obj._attributes.id + '" onclick="showEgbFeature(this.id)">';
 	if (obj.idBudynku) {
 		ret += obj.idBudynku.split(".").pop();
 	} else {
 		ret += '<span class="error">Brak identyfikatora budynku</span>';
 	}
+	ret += "</span></div>";
+	const lokale = getLokaleIds(obj._attributes.id);
+	if (lokale) {
+		ret += '<div class="building-lokale"><div class="item">Lokale:</div>';
+		ret += '<div class="building-lokale-list">' + lokale + "</div>";
+		ret += "</div>";
+	}
 	ret += "</div>";
-	ret += '<div class="div-scroll">' + getLokaleIds(obj._attributes.id) + "</div>";
 	return ret;
 }
 
 function getBudynki(id: string) {
-	let ret = '<div class="grid-container-columns"><div class="item-bold bottom-line">Budynki:</div><div class="item-bold bottom-line">Lokale:</div>';
 	let tmp = "";
 	for (const obj of egbFeatures.budynki.values()) {
 		if (obj.dzialkaZabudowana) {
@@ -286,13 +293,11 @@ function getBudynki(id: string) {
 			}
 		}
 	}
-	if (tmp) {
-		ret += tmp;
-		ret += "</div>";
-		ret += "<br>";
-	} else {
-		ret = "";
+	if (!tmp) {
+		return "";
 	}
+	let ret = '<div class="item-bold">Budynki i lokale:</div>';
+	ret += '<div class="grid-container grid-container-buildings">' + tmp + "</div>";
 	return ret;
 }
 
@@ -312,17 +317,11 @@ export function pokazDzialkeEwidencyjna(id: string) {
 			html += getPoleKlasouzytki(obj);
 			html += getAdresInformacje(obj);
 			html += getPunktyGraniczne(obj);
+			html += getJRG(obj);
 
 			html += "</div>";
 
 			let div = document.createElement("div");
-			div.innerHTML = html;
-			wrapper.appendChild(div);
-
-			html = getJRG(obj);
-			//html += "<br>";
-
-			div = document.createElement("div");
 			div.innerHTML = html;
 			wrapper.appendChild(div);
 

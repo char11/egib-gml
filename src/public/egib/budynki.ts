@@ -158,7 +158,7 @@ function getDzialkeAdresInformacje(obj: EGB_BudynekType) {
 function getJRB(obj: EGB_BudynekType) {
 	let ret = "";
 	if (obj.JRBdlaBudynku) {
-		ret = '<div><span class="item">Jednostka rejestrowa budynków: </span>';
+		ret = '<div class="jrb-card"><span class="item">Jednostka rejestrowa budynków: </span>';
 		const objJb = egbFeatures.jednostkiRejestroweBudynkow.get(obj.JRBdlaBudynku._attributes.href);
 		if (objJb) {
 			ret += '<span class="bold cursor-pointer" id="' + htmlIDs.iJednostkaRejestrowaBudynkow + objJb._attributes.id + '" onclick="showEgbFeature(this.id)">';
@@ -195,23 +195,36 @@ export function getLokaleIds(id: string) {
 }
 
 function getLokale(id: string) {
-	let ret = '<div class="item-bold bottom-line">Lokale:</div>';
-	let tmp = getLokaleIds(id);
-	if (tmp) {
-		ret += '<div class="div-scroll">' + tmp + "</div><br>";
-	} else {
-		ret = "";
+	let tmp = "";
+	for (const obj of egbFeatures.lokaleSamodzielne.values()) {
+		if (obj.budynekZWyodrebnionymLokalem) {
+			if (obj.budynekZWyodrebnionymLokalem._attributes.href === id) {
+				tmp += '<div class="item-card"><span class="item">Lokal: </span>';
+				tmp += '<span class="bold cursor-pointer" id="' + htmlIDs.iLokalSamodzielny + obj._attributes.id + '" onclick="showEgbFeature(this.id)">';
+				if (obj.idLokalu) {
+					tmp += obj.idLokalu.split(".").pop();
+				} else {
+					tmp += '<span class="error">Brak identyfikatora lokalu</span>';
+				}
+				tmp += "</span></div>";
+			}
+		}
 	}
+	if (!tmp) {
+		return "";
+	}
+	let ret = '<div class="item-bold">Lokale:</div>';
+	ret += '<div class="grid-container grid-container-items">' + tmp + "</div>";
 	return ret;
 }
 
 function getObiektyZwiazaneZBudynkiem(id: string) {
-	let ret = '<div class="item-bold bottom-line">Obiekty trwale związane z budynkiem:</div>';
 	let tmp = "";
 	for (const obj of egbFeatures.obiektyTrwaleZwiazaneZBudynkiem.values()) {
 		if (obj.budynekZElementamiZwiazanymi) {
 			if (obj.budynekZElementamiZwiazanymi._attributes.href === id) {
-				tmp += '<div class="cursor-pointer" id="' + htmlIDs.iObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id + '" onclick="showEgbFeature(this.id)">';
+				tmp += '<div class="item-card"><span class="item">Obiekt: </span>';
+				tmp += '<span class="bold cursor-pointer" id="' + htmlIDs.iObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id + '" onclick="showEgbFeature(this.id)">';
 				if (obj.rodzajObiektuZwiazanegoZBudynkiem) {
 					const rodzajObiektu = EGB_RodzajObiektu[obj.rodzajObiektuZwiazanegoZBudynkiem];
 					if (rodzajObiektu) {
@@ -222,15 +235,15 @@ function getObiektyZwiazaneZBudynkiem(id: string) {
 				} else {
 					tmp += '<span class="error">Brak rodzaju obiektu</span>';
 				}
-				tmp += "</div>";
+				tmp += "</span></div>";
 			}
 		}
 	}
-	if (tmp) {
-		ret += '<div class="div-scroll">' + tmp + "</div>";
-	} else {
-		ret = "";
+	if (!tmp) {
+		return "";
 	}
+	let ret = '<div class="item-bold">Obiekty trwale związane z budynkiem:</div>';
+	ret += '<div class="grid-container grid-container-items">' + tmp + "</div>";
 	return ret;
 }
 
@@ -249,17 +262,11 @@ export function pokazBudynek(id: string) {
 			html += getPowierzchnie(obj);
 			html += getDokWlasnosciKW(obj);
 			html += getDzialkeAdresInformacje(obj);
+			html += getJRB(obj);
 
 			html += "</div>";
 
 			let div = document.createElement("div");
-			div.innerHTML = html;
-			wrapper.appendChild(div);
-
-			html = getJRB(obj);
-			//html += "<br>";
-
-			div = document.createElement("div");
 			div.innerHTML = html;
 			wrapper.appendChild(div);
 

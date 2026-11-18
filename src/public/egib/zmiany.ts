@@ -2,7 +2,7 @@ import { getDokumenty, getOperaty, idIIPtoText } from "./common-functions";
 import { egbFeatures } from "./features";
 
 export function getZmiana(id: string) {
-	let ret = '<div class="padded bottom-dashed-line"</div>';
+	let ret = '<div class="padded bottom-dashed-line">';
 	const obj = egbFeatures.zmiany.get(id);
 	if (obj) {
 		ret += '<div><span class="item">Utw. obiektu: </span>';
@@ -73,7 +73,7 @@ export function pokazZmiane(id: string) {
 	if (wrapper) {
 		let html = '<div class="div-title"><span class="item">Zmiana: </span></div>';
 
-		html += getZmiana(id);
+		html += '<div class="grid-container">' + getZmiana(id) + "</div>";
 
 		const div = document.createElement("div");
 		div.innerHTML = html;

@@ -142,6 +142,40 @@ export function tableShowEgbFeature(id: string) {
 keep(tableShowEgbFeature);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+/** Tekst pierwszej komórki wiersza - używany do sortowania tabeli. */
+function firstCellText(row: string) {
+	const match = row.match(/<td[^>]*>([\s\S]*?)<\/td>/i);
+	if (!match) return "";
+	return match[1]
+		.replace(/<[^>]*>/g, "")
+		.replace(/&nbsp;/gi, " ")
+		.replace(/&amp;/gi, "&")
+		.replace(/&lt;/gi, "<")
+		.replace(/&gt;/gi, ">")
+		.replace(/&quot;/gi, '"')
+		.replace(/&#39;/g, "'")
+		.trim();
+}
+
+/** Sortuje wiersze rosnąco według tekstu pierwszej kolumny.
+ * Daty w formacie dd.mm.rrrr są porównywane chronologicznie, pozostałe wartości tekstowo. */
+function sortRowsByFirstColumn(data: string[]) {
+	const collator = new Intl.Collator("pl", { numeric: true, sensitivity: "base" });
+	const withKeys = data.map((row) => {
+		const text = firstCellText(row);
+		const date = text.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})\b/);
+		const time = date ? Date.UTC(Number(date[3]), Number(date[2]) - 1, Number(date[1])) : null;
+		return { row, text, time };
+	});
+	withKeys.sort((a, b) => {
+		if (!a.text && b.text) return -1;
+		if (a.text && !b.text) return 1;
+		if (a.time !== null && b.time !== null) return a.time - b.time;
+		return collator.compare(a.text, b.text);
+	});
+	return withKeys.map((item) => item.row);
+}
+
 function createTable() {
 	let data: string[] = [];
 	clusterize.clear();
@@ -260,7 +294,7 @@ function createTable() {
 			break;
 		}
 	}
-	clusterize.append(data);
+	clusterize.append(sortRowsByFirstColumn(data));
 }
 
 export function tableGetArea(obj: AreaType) {
