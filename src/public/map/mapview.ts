@@ -11,6 +11,30 @@ import { EGB_KodStabilizacji, EGB_SpelnienieWarunkowDokladnosciowych, EGB_Sposob
 import { EGB_RodzajObiektu } from "../egib/obiekty-trwale-zwiazane-z-budynkiem";
 import { EGB_RodzajBloku } from "../egib/bloki-budynku";
 import { EGB_RodzajWgKST } from "../egib/budynki";
+import { getObrysWewnetrzny } from "./obrys";
+import { getSchodySteps } from "./schody";
+import { getKropkiWzoru } from "./wzory";
+import {
+	ROZSTAW_KROPEK_WJAZDU_X,
+	ROZSTAW_KROPEK_WJAZDU_Y,
+	stylAdresuNieruchomosci,
+	stylBlokuBudynku,
+	stylBudynku,
+	stylDzialkiEwidencyjnej,
+	stylEtykiety,
+	stylJednostkiEwidencyjnej,
+	stylKonturuKlasyfikacyjnego,
+	stylKonturuUzytkuGruntowego,
+	stylKropkiWjazduDoPodziemia,
+	stylObiektuZwiazanegoZBudynkiem,
+	stylObrebuEwidencyjnego,
+	stylPodpory,
+	stylPrzyslanianiaPunktuGranicznego,
+	stylPunktuGranicznego,
+	stylStopniSchodow,
+	stylWewnetrznegoObrysuObiektu,
+	type RodzajEtykiety,
+} from "./symbole";
 
 proj4.defs([
 	["EPSG:2176", "+proj=tmerc +lat_0=0 +lon_0=15 +k=0.999923 +x_0=5500000 +y_0=0 +ellps=GRS80 +units=m +no_defs +type=crs +axis=neu"],
@@ -52,7 +76,14 @@ const map = L.map("map", mapOptions);
 
 let prevLayerClicked: any;
 
+// Uchwyt do przeliczania wewnętrznych obrysów po zmianie zoomu.
+let obInnerZoomHandler: (() => void) | undefined;
+
 let layers: { [key: string]: any } = {};
+
+// Warstwy geometrii w kolejności rysowania (od najniższej do najwyższej).
+// Kolejność jest aktualizowana w showMap().
+let mapGeometryLayers: any[] = [];
 
 const tableButton = L.easyButton(
 	'<img src="./images/table-icon.png">',
@@ -69,6 +100,98 @@ function onEachFeature(feature: geojson.Feature, layer: Layer) {
 	layer.on({
 		click: mapHighlightFeature,
 	});
+}
+
+// Wspólny sposób tworzenia warstwy etykiet. Różnice wynikają wyłącznie
+// ze znaku umownego danego obiektu (wielkość i kolor opisu).
+function labelPointToLayer(rodzaj: RodzajEtykiety) {
+	return function (feature: geojson.Feature, latlng: L.LatLng) {
+		if (feature.properties.text !== undefined) {
+			const label = String(feature.properties.text);
+			return L.circleMarker(latlng, {
+				radius: 1,
+				opacity: 0,
+				labelStyle: {
+					text: label,
+					pos: feature.properties.pos,
+					rotation: feature.properties.rot,
+					ref: feature.properties.ref,
+					...stylEtykiety(rodzaj),
+				},
+			});
+		}
+	};
+}
+
+// Środek prostokąta opisującego poligon. Używany do automatycznych etykiet
+// obiektów, dla których dane nie zawierają własnej PrezentacjiGraficznej.
+function getGeometryCenter(geometry: geojson.Geometry): [number, number] | undefined {
+	let minX = Infinity;
+	let minY = Infinity;
+	let maxX = -Infinity;
+	let maxY = -Infinity;
+	const add = (coords: any) => {
+		if (typeof coords[0] === "number") {
+			minX = Math.min(minX, coords[0]);
+			maxX = Math.max(maxX, coords[0]);
+			minY = Math.min(minY, coords[1]);
+			maxY = Math.max(maxY, coords[1]);
+		} else {
+			for (const child of coords) {
+				add(child);
+			}
+		}
+	};
+	if (geometry.type === "Polygon") {
+		add(geometry.coordinates);
+	} else if (geometry.type === "MultiPolygon") {
+		add(geometry.coordinates);
+	} else {
+		return undefined;
+	}
+	if (!Number.isFinite(minX) || !Number.isFinite(minY)) {
+		return undefined;
+	}
+	return [(minX + maxX) / 2, (minY + maxY) / 2];
+}
+
+// Kąt nachylenia dłuższej krawędzi poligonu. Opis obiektu jest obracany
+// o ten kąt, aby biegł równolegle do jego znaku. Wynik w radianach,
+// znormalizowany do zakresu (-90°, 90°], aby tekst pozostał czytelny.
+function getGeometryRotation(geometry: geojson.Geometry, toPoint: (lng: number, lat: number) => L.Point): number {
+	let longest = 0;
+	let angle = 0;
+	const checkRing = (ring: number[][]) => {
+		for (let i = 1; i < ring.length; i++) {
+			const from = toPoint(ring[i - 1][0], ring[i - 1][1]);
+			const to = toPoint(ring[i][0], ring[i][1]);
+			const dx = to.x - from.x;
+			const dy = to.y - from.y;
+			const length = dx * dx + dy * dy;
+			if (length > longest) {
+				longest = length;
+				angle = Math.atan2(dy, dx);
+			}
+		}
+	};
+	if (geometry.type === "Polygon") {
+		for (const ring of geometry.coordinates) {
+			checkRing(ring);
+		}
+	} else if (geometry.type === "MultiPolygon") {
+		for (const polygon of geometry.coordinates) {
+			for (const ring of polygon) {
+				checkRing(ring);
+			}
+		}
+	}
+	while (angle > Math.PI / 2) {
+		angle -= Math.PI;
+	}
+	while (angle <= -Math.PI / 2) {
+		angle += Math.PI;
+	}
+	return angle;
 }
 
 export function sheetHighlightFeature(id: string) {
@@ -93,7 +216,9 @@ function highlightFeature(layer) {
 		if (prevLayerClicked.feature.geometry.type === "Point") {
 			prevLayerClicked.setStyle(prevLayerClicked.defaultOptions);
 		} else {
-			prevLayerClicked.setStyle(prevLayerClicked.defaultOptions.style);
+			// Styl może być funkcją zależną od rodzaju obiektu.
+			const defaultStyle = prevLayerClicked.defaultOptions.style;
+			prevLayerClicked.setStyle(typeof defaultStyle === "function" ? defaultStyle(prevLayerClicked.feature) : defaultStyle);
 		}
 	}
 	prevLayerClicked = layer;
@@ -101,7 +226,7 @@ function highlightFeature(layer) {
 	if (layer) {
 		layer.setStyle({
 			weight: 3,
-			color: "#666",
+			color: "#e60000",
 			dashArray: "",
 			fillOpacity: 0.3,
 		});
@@ -111,127 +236,75 @@ function highlightFeature(layer) {
 	}
 }
 
+function getFeaturesAtLayerPoint(layer: any, point: L.Point): any[] {
+	const result: any[] = [];
+	layer.eachLayer((featureLayer: any) => {
+		if (featureLayer.options?.interactive !== false && featureLayer._containsPoint?.(point)) {
+			// Białe koło przysłaniające punkt niestabilizowany wskazuje na
+			// właściwą warstwę punktu, aby zaznaczenie i opis dotyczyły punktu.
+			const maskFor = featureLayer.feature?.properties?.maskFor;
+			if (maskFor) {
+				const target = layers[maskFor];
+				if (target) {
+					result.push(target);
+				}
+			} else {
+				result.push(featureLayer);
+			}
+		}
+	});
+	// W warstwie obiekty są rysowane w kolejności dodawania - odwracamy,
+	// aby pierwszy na liście był obiekt położony najwyżej.
+	return result.reverse();
+}
+
+function findTopLayerFeatures(e: L.LeafletMouseEvent): any[] {
+	// Używamy rzeczywistej pozycji kursora. Dla markerów Leaflet potrafi
+	// podstawić środek markera zamiast miejsca kliknięcia.
+	const point = e.originalEvent ? map.mouseEventToLayerPoint(e.originalEvent) : (e.layerPoint ?? map.latLngToLayerPoint(e.latlng));
+
+	// Szukamy od najwyżej położonej warstwy w dół. Lista zawiera tylko obiekty
+	// z pierwszej warstwy, w której znaleziono trafienie.
+	for (let i = mapGeometryLayers.length - 1; i >= 0; i--) {
+		const layer = mapGeometryLayers[i];
+		if (!map.hasLayer(layer)) {
+			continue;
+		}
+		const features = getFeaturesAtLayerPoint(layer, point);
+		if (features.length) {
+			return features;
+		}
+	}
+	return [];
+}
+
+function onMapClick(e: L.LeafletMouseEvent) {
+	const features = findTopLayerFeatures(e);
+	if (!features.length) {
+		highlightFeature(undefined);
+		return;
+	}
+
+	const ids = features.map((feature) => feature.feature.properties.id);
+	// Zaznaczamy najwyżej położony obiekt. Jeżeli pod kursorem jest ich więcej,
+	// info.update() pokaże listę do wyboru.
+	highlightFeature(features[0]);
+	if (ids.length > 1) {
+		info.update(ids);
+	}
+}
+
+map.on("click", onMapClick);
+
 export function showMap() {
 	map.invalidateSize();
 
-	// działka
-	const deStyle = {
-		// fillColor: "#000000",
-		color: "#40A0FF",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.15,
-	};
-	// jednostka
-	const jeStyle = {
-		// fillColor: "#000000",
-		color: "#3388ff",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.1,
-	};
-	//obręb
-	const oeStyle = {
-		// fillColor: "#000000",
-		color: "#3388ff",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.1,
-	};
-	// punkt graniczny
-	const punktGr = {
-		radius: 6,
-		// fillColor: "#ff7800",
-		color: "#f00",
-		weight: 1,
-		// opacity: 1,
-		// fillOpacity: 0.8,
-	};
-	// punkt graniczny
-	const punktGrSPDISD = {
-		radius: 6,
-		// fillColor: "#ff7800",
-		color: "#00f",
-		weight: 1,
-		// opacity: 1,
-		// fillOpacity: 0.8,
-	};
-	// punkt graniczny
-	const punktGrUstab = {
-		radius: 3,
-		fillColor: "#000",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 1,
-	};
-	// obiekt związany z budynkiem - punkt
-	const obCircleStyle = {
-		radius: 8,
-		// fillColor: "#000000",
-		color: "#C80000",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.15,
-	};
-	// kontur klasyfikacyjny
-	const kkStyle = {
-		// fillColor: "#000000",
-		color: "#24BC24",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.1,
-		dashArray: "9, 7",
-	};
-	// użytek
-	const kuStyle = {
-		// fillColor: "#000000",
-		color: "#000080",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.1,
-		dashArray: "5, 5",
-	};
-	// budynek
-	const buStyle = {
-		// fillColor: "#000000",
-		color: "#c80000",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.15,
-	};
-	// blok budynku
-	const bbStyle = {
-		// fillColor: "#000000",
-		color: "#c80000",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.15,
-	};
-	// obiekt zwiazany z budynkiem
-	const obStyle = {
-		// fillColor: "#000000",
-		color: "#c80000",
-		weight: 2,
-		// opacity: 1,
-		fillOpacity: 0.15,
-	};
-	// adres nieruchmości
-	const adStyle = {
-		radius: 3,
-		// fillColor: "#000000",
-		color: "#222222",
-		weight: 1,
-		// opacity: 1,
-		//fillOpacity: 0.15,
-	};
-	// odnośnik
-	//const odStyle = {
-	//	color: "#222222",
-	//	weight: 1,
-	//	// opacity: 1,
-	//	//fillOpacity: 0.15,
-	//};
+	// Style geometrii zgodne ze znakami umownymi mapy zasadniczej.
+	const deStyle = stylDzialkiEwidencyjnej();
+	const jeStyle = stylJednostkiEwidencyjnej();
+	const oeStyle = stylObrebuEwidencyjnego();
+	const kkStyle = stylKonturuKlasyfikacyjnego();
+	const kuStyle = stylKonturuUzytkuGruntowego();
 
 	let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -375,12 +448,19 @@ export function showMap() {
 	};
 	for (const obj of egbFeatures.budynki.values()) {
 		if (obj.geometria) {
-			geoJson.features.push({ type: "Feature", properties: { id: htmlIDs.mBudynek + obj._attributes.id }, geometry: parseGml(obj.geometria) });
+			geoJson.features.push({
+				type: "Feature",
+				properties: {
+					id: htmlIDs.mBudynek + obj._attributes.id,
+					podziemny: obj.liczbaKondygnacjiNadziemnych === "0",
+				},
+				geometry: parseGml(obj.geometria),
+			});
 		}
 	}
 	let layerBu = L.geoJSON(geoJson, {
 		onEachFeature: onEachFeature,
-		style: buStyle,
+		style: stylBudynku,
 	});
 
 	geoJson = {
@@ -389,72 +469,212 @@ export function showMap() {
 	};
 	for (const obj of egbFeatures.blokiBudynku.values()) {
 		if (obj.geometria) {
-			geoJson.features.push({ type: "Feature", properties: { id: htmlIDs.mBlokBudynku + obj._attributes.id }, geometry: parseGml(obj.geometria) });
+			geoJson.features.push({
+				type: "Feature",
+				properties: {
+					id: htmlIDs.mBlokBudynku + obj._attributes.id,
+					rodzajBloku: obj.rodzajBloku,
+				},
+				geometry: parseGml(obj.geometria),
+			});
 		}
 	}
 	let layerBB = L.geoJSON(geoJson, {
 		onEachFeature: onEachFeature,
-		style: bbStyle,
+		style: stylBlokuBudynku,
 	});
 
 	geoJson = {
 		type: "FeatureCollection",
 		features: [],
 	};
+	const obStepFeatures: geojson.Feature[] = [];
+	// Wielokąty, dla których rysowany jest drugi, wewnętrzny obrys znaku.
+	const obWielokaty: { rodzaj: string; geometry: geojson.Geometry }[] = [];
+	// Znaki tarasu, werandy/ganku i wiatrołapu są złożone z dwóch linii.
+	const obDwuLinowe = new Set(["t", "w", "i"]);
+	// Poligony wjazdów do podziemia - ich wnętrze wypełnia wzór z kropek.
+	const obWjazdyDoPodziemia: geojson.Geometry[] = [];
+	// Rampa i podjazd dla niepełnosprawnych mają opis umieszczony w środku
+	// znaku, nawet jeśli dane nie zawierają własnej etykiety.
+	const obAutoLabels: { id: string; text: string; geometry: geojson.Geometry }[] = [];
+	const OB_AUTO_LABEL_TEXT: { [rodzaj: string]: string } = { r: "rmp", d: "n" };
 	for (const obj of egbFeatures.obiektyTrwaleZwiazaneZBudynkiem.values()) {
 		if (obj.geometria) {
-			geoJson.features.push({
-				type: "Feature",
-				properties: { id: htmlIDs.mObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id },
-				geometry: parseGml(obj.geometria),
-			});
-			//if (obj.poliliniaKierunkowa) {
-			//	geoJson.features.push({
-			//		type: "Feature",
-			//		properties: { id: htmlIDs.mObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id },
-			//		geometry: parseGml(obj.poliliniaKierunkowa),
-			//	});
-			//}
+			const geometry = parseGml(obj.geometria);
+			if (geometry) {
+				const rodzaj = obj.rodzajObiektuZwiazanegoZBudynkiem;
+				geoJson.features.push({
+					type: "Feature",
+					properties: {
+						id: htmlIDs.mObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id,
+						rodzaj,
+					},
+					geometry,
+				});
+				const autoLabelText = OB_AUTO_LABEL_TEXT[rodzaj];
+				if (autoLabelText) {
+					obAutoLabels.push({ id: obj._attributes.id, text: autoLabelText, geometry });
+				}
+				if (obDwuLinowe.has(rodzaj)) {
+					obWielokaty.push({ rodzaj, geometry });
+				}
+				if (rodzaj === "j") {
+					obWjazdyDoPodziemia.push(geometry);
+				}
+				// Schody mają dodatkowo polilinię kierunkową, na jej podstawie
+				// rysowane są linie stopni wewnątrz poligonu.
+				if (rodzaj === "s" && obj.poliliniaKierunkowa) {
+					const direction = parseGml(obj.poliliniaKierunkowa);
+					for (const coordinates of getSchodySteps(geometry, direction)) {
+						obStepFeatures.push({
+							type: "Feature",
+							properties: { id: htmlIDs.mObiektTrwaleZwiazanyZBudynkiem + obj._attributes.id },
+							geometry: { type: "LineString", coordinates },
+						});
+					}
+				}
+			}
 		}
 	}
 	let layerOb = L.geoJSON(geoJson, {
 		pointToLayer: (feature, latlng) => {
-			return L.circleMarker(latlng, obCircleStyle);
+			return L.circleMarker(latlng, stylPodpory());
 		},
 		onEachFeature: onEachFeature,
-		style: obStyle,
+		style: stylObiektuZwiazanegoZBudynkiem,
 	});
+	let layerObInner = L.geoJSON(
+		{
+			type: "FeatureCollection",
+			features: [],
+		},
+		{
+			interactive: false,
+			style: stylWewnetrznegoObrysuObiektu,
+		},
+	);
+	// Odstęp między podwójnymi liniami jest stały na ekranie, podobnie jak
+	// grubości linii i długości kresek. Dzięki temu obie linie pozostają
+	// blisko siebie niezależnie od zoomu.
+	const OB_INNER_GAP_PX = 5;
+	function buildObInnerFeatures(): geojson.Feature[] {
+		const from = map.containerPointToLatLng([0, 0]);
+		const to = map.containerPointToLatLng([OB_INNER_GAP_PX, 0]);
+		const distance = map.distance(from, to);
+		const features: geojson.Feature[] = [];
+		for (const obiekt of obWielokaty) {
+			for (const coordinates of getObrysWewnetrzny(obiekt.geometry, distance)) {
+				features.push({
+					type: "Feature",
+					properties: { rodzaj: obiekt.rodzaj },
+					geometry: { type: "LineString", coordinates },
+				});
+			}
+		}
+		return features;
+	}
+	function updateObInner() {
+		layerObInner.clearLayers();
+		layerObInner.addData({ type: "FeatureCollection", features: buildObInnerFeatures() });
+	}
+	let layerObSteps = L.geoJSON(
+		{
+			type: "FeatureCollection",
+			features: obStepFeatures,
+		},
+		{
+			interactive: false,
+			style: stylStopniSchodow,
+		},
+	);
+	// Kropki wypełnienia wjazdów do podziemia. Wzór jest wyrównany do
+	// ekranu, więc jego rozstaw nie zmienia się wraz z zoomem i jest
+	// przeliczany po każdej zmianie skali.
+	let layerObDots = L.geoJSON(
+		{
+			type: "FeatureCollection",
+			features: [],
+		},
+		{
+			interactive: false,
+			pointToLayer: (_feature, latlng) => L.circleMarker(latlng, stylKropkiWjazduDoPodziemia()),
+		},
+	);
+	function buildObDotsFeatures(): geojson.Feature[] {
+		const features: geojson.Feature[] = [];
+		for (const geometry of obWjazdyDoPodziemia) {
+			const positions = getKropkiWzoru(
+				geometry,
+				(position) => map.latLngToContainerPoint(L.latLng(position[1], position[0])),
+				(point) => {
+					const latlng = map.containerPointToLatLng(L.point(point.x, point.y));
+					return [latlng.lng, latlng.lat];
+				},
+				ROZSTAW_KROPEK_WJAZDU_X,
+				ROZSTAW_KROPEK_WJAZDU_Y,
+			);
+			for (const coordinates of positions) {
+				features.push({
+					type: "Feature",
+					properties: {},
+					geometry: { type: "Point", coordinates },
+				});
+			}
+		}
+		return features;
+	}
+	function updateObDots() {
+		layerObDots.clearLayers();
+		layerObDots.addData({ type: "FeatureCollection", features: buildObDotsFeatures() });
+	}
 
 	geoJson = {
 		type: "FeatureCollection",
 		features: [],
 	};
+	// Białe koła przysłaniające obiekty pod punktami niestabilizowanymi.
+	// Punkt stabilizowany przysłania je własnym białym wypełnieniem.
+	const pgMaskFeatures: geojson.Feature[] = [];
 	for (const obj of egbFeatures.punktyGraniczne.values()) {
 		if (obj.geometria) {
-			let circleStyle = "circleRed";
-			if (obj.spelnienieWarunkowDokl === "1" && obj.sposobPozyskania === "1") {
-				circleStyle = "circleBlue";
+			const geometry = parseGml(obj.geometria);
+			if (!geometry) {
+				continue;
 			}
-			if (["3", "4", "5", "6"].includes(obj.rodzajStabilizacji)) {
-				circleStyle = "dotBlack";
-			}
+			// Punkt stabilizowany (znak naziemny, podziemny lub szczegół
+			// terenowy) jest oznaczany okręgiem, niestabilizowany kropką.
+			const stabilizowany = ["3", "4", "5", "6"].includes(obj.rodzajStabilizacji);
 			geoJson.features.push({
 				type: "Feature",
-				properties: { id: htmlIDs.mPunktGraniczny + obj._attributes.id, style: circleStyle },
-				geometry: parseGml(obj.geometria),
+				properties: { id: htmlIDs.mPunktGraniczny + obj._attributes.id, stabilizowany },
+				geometry,
 			});
+			if (!stabilizowany) {
+				pgMaskFeatures.push({
+					type: "Feature",
+					properties: { maskFor: htmlIDs.mPunktGraniczny + obj._attributes.id },
+					geometry,
+				});
+			}
 		}
 	}
+	let layerPGMask = L.geoJSON(
+		{
+			type: "FeatureCollection",
+			features: pgMaskFeatures,
+		},
+		{
+			// Koło jest klikalne, aby łatwiej zaznaczyć mały punkt.
+			interactive: true,
+			pointToLayer: (feature, latlng) => {
+				return L.circleMarker(latlng, stylPrzyslanianiaPunktuGranicznego());
+			},
+		},
+	);
 	let layerPG = L.geoJSON(geoJson, {
 		pointToLayer: (feature, latlng) => {
-			switch (feature.properties.style) {
-				case "circleRed":
-					return L.circleMarker(latlng, punktGr);
-				case "circleBlue":
-					return L.circleMarker(latlng, punktGrSPDISD);
-				case "dotBlack":
-					return L.circleMarker(latlng, punktGrUstab);
-			}
+			return L.circleMarker(latlng, stylPunktuGranicznego(feature.properties.stabilizowany));
 		},
 		onEachFeature: onEachFeature,
 	});
@@ -470,7 +690,7 @@ export function showMap() {
 	}
 	let layerAd = L.geoJSON(geoJson, {
 		pointToLayer: (feature, latlng) => {
-			return L.circleMarker(latlng, adStyle);
+			return L.circleMarker(latlng, stylAdresuNieruchomosci());
 		},
 		onEachFeature: onEachFeature,
 	});
@@ -483,204 +703,48 @@ export function showMap() {
 	//------------------------------------------------
 
 	let layerLabelsJE = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("je"),
 	});
 
 	let layerLabelsOE = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("oe"),
 	});
 
 	let layerLabelsDE = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("de"),
 	});
 
 	let layerLabelsKU = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("ku"),
 	});
 
 	let layerLabelsKK = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("kk"),
 	});
 
 	let layerLabelsBu = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("bu"),
 	});
 
 	let layerLabelsBB = L.geoJSON(geoJson, {
-		pointToLayer: function (feature, latlng) {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("bb"),
 	});
 
 	let layerLabelsOb = L.geoJSON(geoJson, {
-		pointToLayer: (feature, latlng) => {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("ob"),
 	});
 
 	let layerLabelsPG = L.geoJSON(geoJson, {
-		pointToLayer: (feature, latlng) => {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
+		pointToLayer: labelPointToLayer("pg"),
 	});
 
 	let layerLabelsAd = L.geoJSON(geoJson, {
-		pointToLayer: (feature, latlng) => {
-			if (feature.properties.text !== undefined) {
-				const label = String(feature.properties.text);
-				return L.circleMarker(latlng, {
-					radius: 1,
-					opacity: 0,
-					//text: label,
-					labelStyle: {
-						text: label,
-						pos: feature.properties.pos,
-						rotation: feature.properties.rot,
-						ref: feature.properties.ref,
-					},
-				});
-			}
-		},
-		//style: odStyle,
+		pointToLayer: labelPointToLayer("ad"),
 	});
 
+	// Obiekty, które mają własną etykietę w PrezentacjiGraficznej. Dla nich
+	// nie dodajemy automatycznego opisu, aby nie dublować tekstu.
+	const obWithGraphicLabel = new Set<string>();
 	for (const obj of egbFeatures.prezentacjeGraficzne.values()) {
 		const obiektPrzedstawiany = obj.obiektPrzedstawiany;
 		if (obiektPrzedstawiany) {
@@ -727,6 +791,9 @@ export function showMap() {
 				} else if (egbFeatures.blokiBudynku.get(obiektPrzedstawiany._attributes.href)) {
 					layerLabelsBB.addData(geoJson);
 				} else if (egbFeatures.obiektyTrwaleZwiazaneZBudynkiem.get(obiektPrzedstawiany._attributes.href)) {
+					if (geoJson.features.some((feature) => feature.properties?.text !== undefined)) {
+						obWithGraphicLabel.add(obiektPrzedstawiany._attributes.href);
+					}
 					layerLabelsOb.addData(geoJson);
 				} else if (egbFeatures.punktyGraniczne.get(obiektPrzedstawiany._attributes.href)) {
 					layerLabelsPG.addData(geoJson);
@@ -737,6 +804,32 @@ export function showMap() {
 		}
 	}
 
+	// Automatyczne opisy rampy i podjazdu umieszczamy na środku ich poligonu.
+	const obAutoLabelFeatures: geojson.Feature[] = [];
+	for (const label of obAutoLabels) {
+		if (obWithGraphicLabel.has(label.id)) {
+			continue;
+		}
+		const center = getGeometryCenter(label.geometry);
+		if (!center) {
+			continue;
+		}
+		obAutoLabelFeatures.push({
+			type: "Feature",
+			properties: {
+				id: htmlIDs.mObiektTrwaleZwiazanyZBudynkiem + label.id,
+				text: label.text,
+				rot: getGeometryRotation(label.geometry, (lng, lat) => map.project(L.latLng(lat, lng))),
+			},
+			geometry: { type: "Point", coordinates: center },
+		});
+	}
+	if (obAutoLabelFeatures.length) {
+		layerLabelsOb.addData({ type: "FeatureCollection", features: obAutoLabelFeatures });
+	}
+
+	mapGeometryLayers = [layerJE, layerOE, layerKU, layerKK, layerDE, layerBu, layerBB, layerOb, layerPGMask, layerPG, layerAd];
+
 	let layerGroupJE = L.layerGroup([layerJE, layerLabelsJE]);
 	let layerGroupOE = L.layerGroup([layerOE, layerLabelsOE]);
 	let layerGroupDE = L.layerGroup([layerDE, layerLabelsDE]);
@@ -744,8 +837,8 @@ export function showMap() {
 	let layerGroupKK = L.layerGroup([layerKK, layerLabelsKK]);
 	let layerGroupBu = L.layerGroup([layerBu, layerLabelsBu]);
 	let layerGroupBB = L.layerGroup([layerBB, layerLabelsBB]);
-	let layerGroupOb = L.layerGroup([layerOb, layerLabelsOb]);
-	let layerGroupPG = L.layerGroup([layerPG, layerLabelsPG]);
+	let layerGroupOb = L.layerGroup([layerObDots, layerOb, layerObInner, layerObSteps, layerLabelsOb]);
+	let layerGroupPG = L.layerGroup([layerPGMask, layerPG, layerLabelsPG]);
 	let layerGroupAd = L.layerGroup([layerAd, layerLabelsAd]);
 
 	let overlayMaps = {
@@ -770,7 +863,9 @@ export function showMap() {
 		"Adresy nieruchom.": layerGroupAd,
 	};
 
-	map.on("overlayadd", () => {
+	// Wspólna kolejność rysowania warstw - używana po włączeniu warstwy
+	// i po przeliczeniu wewnętrznych obrysów przy zmianie zoomu.
+	function bringGeometryLayersToFront() {
 		layerJE.bringToFront();
 		layerOE.bringToFront();
 		layerKU.bringToFront();
@@ -778,10 +873,16 @@ export function showMap() {
 		layerDE.bringToFront();
 		layerBu.bringToFront();
 		layerBB.bringToFront();
+		layerObDots.bringToFront();
 		layerOb.bringToFront();
+		layerObInner.bringToFront();
+		layerObSteps.bringToFront();
+		layerPGMask.bringToFront();
 		layerPG.bringToFront();
 		layerAd.bringToFront();
-	});
+	}
+
+	map.on("overlayadd", bringGeometryLayersToFront);
 
 	let layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
@@ -818,6 +919,22 @@ export function showMap() {
 		map.fitBounds(layerPG.getBounds());
 	}
 
+	// Wewnętrzne obrysy i wzory kropek zależą od aktualnej skali, więc
+	// przeliczamy je po każdej zmianie zoomu. Poprzedni uchwyt usuwamy,
+	// aby showMap() wywołane ponownie nie dodawało kolejnych listenerów.
+	updateObInner();
+	updateObDots();
+	bringGeometryLayersToFront();
+	if (obInnerZoomHandler) {
+		map.off("zoomend", obInnerZoomHandler);
+	}
+	obInnerZoomHandler = () => {
+		updateObInner();
+		updateObDots();
+		bringGeometryLayersToFront();
+	};
+	map.on("zoomend", obInnerZoomHandler);
+
 	// map.on("zoomend", function () {
 	// 	var zoomlevel = map.getZoom();
 	// 	if (zoomlevel < 18) {
@@ -842,14 +959,24 @@ export function showMap() {
 	info.onAdd = function () {
 		this.infoDiv = L.DomUtil.create("div", "div-mapinfo");
 		this.infoDiv.addEventListener("click", showFullInfo);
+		L.DomEvent.disableClickPropagation(this.infoDiv);
 		this.update();
 		return this.infoDiv;
 	};
 
-	info.update = function (fId: string) {
+	info.update = function (fIds?: string | string[]) {
+		const ids = Array.isArray(fIds) ? fIds : fIds ? [fIds] : [];
 		let info = "";
 		let html = '<div class="info-wrapper">';
-		if (fId) {
+		if (ids.length > 1) {
+			info += '<div class="map-h">Obiekty pod kursorem (' + ids.length + ')</div><br><div class="map-list">';
+			for (const mapFeatureId of ids) {
+				info += '<div class="map-list-item" data-feature-id="' + mapFeatureId + '">' + getMapFeatureLabel(mapFeatureId) + "</div>";
+			}
+			info += "</div>";
+			html += "<div>" + info + "</div><br><div>Kliknij obiekt, aby wyświetlić informacje</div>" + '<div id="feature-id" style="display: none;"></div>';
+		} else if (ids.length === 1) {
+			const fId = ids[0];
 			const id = fId.slice(3);
 			const gmlFeature = fId.slice(0, 3);
 			switch (gmlFeature) {
@@ -1144,6 +1271,19 @@ export function showMap() {
 		}
 		html += "</div>";
 		this.infoDiv.innerHTML = html;
+
+		if (ids.length > 1) {
+			const listItems = this.infoDiv.querySelectorAll(".map-list-item") as NodeListOf<HTMLElement>;
+			listItems.forEach((item) => {
+				item.addEventListener("click", (event: MouseEvent) => {
+					event.stopPropagation();
+					const featureId = item.dataset.featureId;
+					if (featureId && layers[featureId]) {
+						highlightFeature(layers[featureId]);
+					}
+				});
+			});
+		}
 	};
 
 	info.addTo(map);
@@ -1224,5 +1364,83 @@ function showFullInfo() {
 	const gmlFeature = document.querySelector("#feature-id") as HTMLInputElement;
 	if (gmlFeature.innerHTML) {
 		showEgbFeatureFromMap(gmlFeature.innerHTML.slice(1));
+	}
+}
+
+function getMapFeatureLabel(fId: string): string {
+	const id = fId.slice(3);
+	const gmlFeature = fId.slice(0, 3);
+	switch (gmlFeature) {
+		case htmlIDs.mJednostkaEwidencyjna: {
+			const obj = egbFeatures.jednostkiEwidencyjne.get(id);
+			return "Jednostka ewidencyjna" + (obj?.idJednostkiEwid ? " " + obj.idJednostkiEwid : "");
+		}
+		case htmlIDs.mObrebEwidencyjny: {
+			const obj = egbFeatures.obrebyEwidencyjne.get(id);
+			return "Obręb ewidencyjny" + (obj?.idObrebu ? " " + obj.idObrebu.split(".").pop() : "");
+		}
+		case htmlIDs.mKonturKlasyfikacyjny: {
+			const obj = egbFeatures.konturyKlasyfikacyjne.get(id);
+			let label = "Kontur klasyfikacyjny";
+			if (obj?.idKonturu) {
+				label += " " + obj.idKonturu;
+			}
+			if (obj?.OZU) {
+				label += " (" + obj.OZU + (obj.OZK ?? "") + ")";
+			}
+			return label;
+		}
+		case htmlIDs.mKonturUzytkuGruntowego: {
+			const obj = egbFeatures.konturyUzytkuGruntowego.get(id);
+			let label = "Kontur użytku gruntowego";
+			if (obj?.idUzytku) {
+				label += " " + obj.idUzytku;
+			}
+			if (obj?.OFU) {
+				label += " (" + obj.OFU + ")";
+			}
+			return label;
+		}
+		case htmlIDs.mDzialkaEwidencyjna: {
+			const obj = egbFeatures.dzialkiEwidencyjne.get(id);
+			return "Działka ewidencyjna" + (obj?.idDzialki ? " " + obj.idDzialki.split(".").pop() : "");
+		}
+		case htmlIDs.mBudynek: {
+			const obj = egbFeatures.budynki.get(id);
+			return "Budynek" + (obj?.idBudynku ? " " + obj.idBudynku.split(".").pop() : "");
+		}
+		case htmlIDs.mBlokBudynku: {
+			const obj = egbFeatures.blokiBudynku.get(id);
+			return "Blok budynku" + (obj?.rodzajBloku ? " " + obj.rodzajBloku : "");
+		}
+		case htmlIDs.mObiektTrwaleZwiazanyZBudynkiem:
+			const obj = egbFeatures.obiektyTrwaleZwiazaneZBudynkiem.get(id);
+			return "Obiekt trwale związany z budynkiem" + (obj?.rodzajObiektuZwiazanegoZBudynkiem ? " " + obj.rodzajObiektuZwiazanegoZBudynkiem : "");
+		case htmlIDs.mPunktGraniczny: {
+			const obj = egbFeatures.punktyGraniczne.get(id);
+			return "Punkt graniczny" + (obj?.idPunktu ? " " + obj.idPunktu : "");
+		}
+		case htmlIDs.mAdresNieruchomosci: {
+			const obj = egbFeatures.adresyNieruchomosci.get(id);
+			if (!obj) {
+				return "Adres nieruchomości";
+			}
+			let label = "";
+			if (obj.nazwaMiejscowosci) {
+				label += obj.nazwaMiejscowosci + " ";
+			}
+			if (obj.nazwaUlicy) {
+				label += obj.nazwaUlicy + " ";
+			}
+			if (obj.numerPorzadkowy) {
+				label += obj.numerPorzadkowy;
+			}
+			if (obj.numerLokalu) {
+				label += "/" + obj.numerLokalu;
+			}
+			return "Adres nieruchomości" + (label ? ": " + label.trim() : "");
+		}
+		default:
+			return "Obiekt";
 	}
 }

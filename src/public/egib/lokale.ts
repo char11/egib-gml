@@ -140,14 +140,14 @@ function getBudynekAdresInformacje(obj: EGB_LokalSamodzielnyType) {
 function getJRL(obj: EGB_LokalSamodzielnyType) {
 	let ret = "";
 	if (obj.JRdlaLokalu) {
-		ret = '<div><span class="item">Jednostka rejestrowa lokali: </span>';
+		ret = '<div class="jrl-card"><span class="item">Jednostka rejestrowa lokali: </span>';
 		const objJl = egbFeatures.jednostkiRejestroweLokali.get(obj.JRdlaLokalu._attributes.href);
 		if (objJl) {
 			ret += '<span class="bold cursor-pointer" id="' + htmlIDs.iJednostkaRejestrowaLokali + objJl._attributes.id + '" onclick="showEgbFeature(this.id)">';
 			if (objJl.idJednostkiRejestrowej) {
 				ret += objJl.idJednostkiRejestrowej.split(".").pop();
 			} else {
-				ret += '<span class="error-inline">Brak identyfikatora JRL/span>';
+				ret += '<span class="error-inline">Brak identyfikatora JRL</span>';
 			}
 			ret += "</span>";
 		} else {
@@ -170,17 +170,11 @@ export function pokazLokal(id: string) {
 			html += getPowierzchniePomieszczeniaPrzynalezne(obj);
 			html += getDokWlasnosciKW(obj);
 			html += getBudynekAdresInformacje(obj);
+			html += getJRL(obj);
 
 			html += "</div>";
 
 			let div = document.createElement("div");
-			div.innerHTML = html;
-			wrapper.appendChild(div);
-
-			html = getJRL(obj);
-			//html += "<br>";
-
-			div = document.createElement("div");
 			div.innerHTML = html;
 			wrapper.appendChild(div);
 		}

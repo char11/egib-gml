@@ -66,7 +66,7 @@ export function pokazOperat(id: string) {
 	const wrapper = document.getElementById("main-wrapper");
 	if (wrapper) {
 		let html = '<div class="div-title"><span class="item">Operat techniczny: </span></div>';
-		html += getOperatTechniczny(id);
+		html += '<div class="grid-container">' + getOperatTechniczny(id) + "</div>";
 
 		const div = document.createElement("div");
 		div.innerHTML = html;

@@ -127,7 +127,7 @@ export function pokazDokument(id: string) {
 	const wrapper = document.getElementById("main-wrapper");
 	if (wrapper) {
 		let html = '<div class="div-title"><span class="item">Dokument: </span></div>';
-		html += getDokument(id);
+		html += '<div class="grid-container">' + getDokument(id) + "</div>";
 
 		const div = document.createElement("div");
 		div.innerHTML = html;

@@ -36,15 +36,35 @@
     <dialog id="table-dialog">
       <div id="dialog-wrapper">
         <div id="table-fixed-bar">
+          <div id="table-header">
+            <div id="table-heading">
+              <div id="table-title">Tabela danych</div>
+              <div id="table-subtitle">Wybierz rodzaj obiektów i filtruj wiersze</div>
+            </div>
+            <button id="close-table" class="button-narrow" aria-label="Zamknij tabelę">X</button>
+          </div>
           <div id="table-grid-container-bar">
-            <select id="select-features">
-              <option value="">- Wybierz -</option>
-            </select>
+            <div id="select-features-control" class="select-features">
+              <button
+                type="button"
+                id="select-features-toggle"
+                class="select-features-toggle"
+                aria-haspopup="listbox"
+                aria-controls="select-features-menu"
+                aria-expanded="false"
+              >
+                <span id="select-features-label">- Wybierz -</span>
+                <span class="select-features-arrow" aria-hidden="true"></span>
+              </button>
+              <div id="select-features-menu" class="select-features-menu" role="listbox" hidden></div>
+              <select id="select-features" tabindex="-1" aria-hidden="true">
+                <option value="">- Wybierz -</option>
+              </select>
+            </div>
             <form id="table-filter-form" action="">
               <input type="text" id="table-filter" placeholder="Filtruj..." />
               <button type="submit">Filtruj</button>
             </form>
-            <button id="close-table" class="button-narrow">X</button>
           </div>
         </div>
         <div class="clusterize table-wrapper">
