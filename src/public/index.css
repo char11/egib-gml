@@ -215,11 +215,53 @@ button:focus-visible {
   cursor: pointer;
 }
 
+#main-wrapper .cursor-pointer {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+/* Klikalne elementy i karty zmieniają tło po najechaniu. */
+#main-wrapper .cursor-pointer:hover {
+  background-color: var(--accent-soft);
+  border-color: var(--accent);
+  border-radius: 4px;
+}
+
 /* Pojedyncze klikalne elementy tekstowe (bez elementów potomnych) */
 #main-wrapper .cursor-pointer:not(:has(*)) {
   text-decoration: underline dashed;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+}
+
+/* Napisy typu "Pokaż udziały..." zajmują tylko szerokość tekstu,
+   dzięki czemu podświetla się sam napis, a nie cała szerokość strony. */
+#main-wrapper .cursor-pointer.item-italic {
+  display: inline-block;
+}
+
+#main-wrapper .cursor-pointer:not(:has(*)):hover {
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+/* Karta, której cała zawartość jest klikalna, podświetla się dopiero wtedy,
+   gdy kursor jest nad klikalną zawartością, a nie nad paddingiem/obramowaniem. */
+#main-wrapper .grid-item:has(> .cursor-pointer.expanded) {
+  transition: background-color 160ms ease;
+}
+
+#main-wrapper .grid-item:has(> .cursor-pointer.expanded:hover) {
+  background-color: var(--accent-soft);
+}
+
+/* Karty udziałów we własności/władaniu: klikalna zawartość nie maluje
+   własnego tła - podświetla się cały kafelek. */
+#main-wrapper .grid-container-owners .cursor-pointer:hover {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .cursor-default {
@@ -324,9 +366,30 @@ button:focus-visible {
 
 #grid-container-bar {
   display: grid;
-  grid-template-columns: auto auto auto 1fr 1fr auto;
+  grid-template-columns: auto auto auto 1fr auto minmax(0, 1fr) auto;
   grid-gap: 10px;
   align-items: center;
+}
+
+/* Nazwa otwartego pliku pomiędzy przyciskiem Tabela i zamknięcia. */
+#opened-file-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-family: "OpenSansCondensed", sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+@media (max-width: 720px) {
+  #opened-file-name {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: left;
+  }
 }
 
 #table-grid-container-bar {
@@ -489,6 +552,17 @@ button:focus-visible {
   background-color: hsl(40, 35%, 90%);
 }
 
+#map-back-button {
+  font-family: Lato, "OpenSans", sans-serif;
+}
+
+.map-back-arrow {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
 #modal {
   position: fixed;
   top: 0;
@@ -566,6 +640,15 @@ button:focus-visible {
 #upload-progress.error {
   max-width: 80ch;
   margin: 0 auto;
+  overflow-wrap: anywhere;
+}
+
+/* Informacja o konwersji starszego schematu do EGIB 1.11. */
+#upload-progress.converted {
+  max-width: 80ch;
+  margin: 0 auto;
+  color: #b3261e;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 

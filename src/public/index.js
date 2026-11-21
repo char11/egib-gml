@@ -56,7 +56,7 @@ var __esm = (fn, res, err) => () => {
   return res;
 };
 
-// node_modules/proj4/dist/proj4-src.js
+// ../node_modules/proj4/dist/proj4-src.js
 var require_proj4_src = __commonJS(function(exports, module) {
   (function(global2, factory) {
     typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, global2.proj4 = factory());
@@ -7930,7 +7930,7 @@ northing meters` + mgrsString;
   });
 });
 
-// node_modules/leaflet/dist/leaflet-src.js
+// ../node_modules/leaflet/dist/leaflet-src.js
 var require_leaflet_src = __commonJS(function(exports, module) {
   (function(global2, factory) {
     typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.leaflet = {}));
@@ -15990,7 +15990,7 @@ var require_leaflet_src = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/proj4leaflet/src/proj4leaflet.js
+// ../node_modules/proj4leaflet/src/proj4leaflet.js
 var require_proj4leaflet = __commonJS(function(exports, module) {
   (function(factory) {
     var L2, proj4;
@@ -16192,7 +16192,7 @@ var require_proj4leaflet = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/clusterize.js/clusterize.js
+// ../node_modules/clusterize.js/clusterize.js
 var require_clusterize = __commonJS(function(exports, module) {
   (function(name, definition) {
     if (typeof module != "undefined")
@@ -16461,7 +16461,7 @@ var require_clusterize = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/@babel/runtime/helpers/esm/typeof.js
+// ../node_modules/@babel/runtime/helpers/esm/typeof.js
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(o) {
@@ -16472,7 +16472,7 @@ function _typeof(o) {
 }
 var init_typeof = () => {};
 
-// node_modules/html2canvas/dist/html2canvas.js
+// ../node_modules/html2canvas/dist/html2canvas.js
 var require_html2canvas = __commonJS(function(exports, module) {
   /*!
    * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
@@ -23937,7 +23937,7 @@ var require_html2canvas = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/dompurify/dist/purify.es.mjs
+// ../node_modules/dompurify/dist/purify.es.mjs
 var exports_purify_es = {};
 __export(exports_purify_es, {
   default: () => purify_default
@@ -26129,7 +26129,7 @@ var init_purify_es = __esm(() => {
   purify_default = createDOMPurify();
 });
 
-// node_modules/core-js/internals/global-this.js
+// ../node_modules/core-js/internals/global-this.js
 var require_global_this = __commonJS(function(exports, module) {
   var check = function(it) {
     return it && it.Math === Math && it;
@@ -26139,7 +26139,7 @@ var require_global_this = __commonJS(function(exports, module) {
   }() || Function("return this")();
 });
 
-// node_modules/core-js/internals/fails.js
+// ../node_modules/core-js/internals/fails.js
 var require_fails = __commonJS(function(exports, module) {
   module.exports = function(exec) {
     try {
@@ -26150,7 +26150,7 @@ var require_fails = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/descriptors.js
+// ../node_modules/core-js/internals/descriptors.js
 var require_descriptors = __commonJS(function(exports, module) {
   var fails = require_fails();
   module.exports = !fails(function() {
@@ -26160,7 +26160,7 @@ var require_descriptors = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/function-bind-native.js
+// ../node_modules/core-js/internals/function-bind-native.js
 var require_function_bind_native = __commonJS(function(exports, module) {
   var fails = require_fails();
   module.exports = !fails(function() {
@@ -26169,7 +26169,7 @@ var require_function_bind_native = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/function-call.js
+// ../node_modules/core-js/internals/function-call.js
 var require_function_call = __commonJS(function(exports, module) {
   var NATIVE_BIND = require_function_bind_native();
   var call = Function.prototype.call;
@@ -26178,7 +26178,7 @@ var require_function_call = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-property-is-enumerable.js
+// ../node_modules/core-js/internals/object-property-is-enumerable.js
 var require_object_property_is_enumerable = __commonJS(function(exports) {
   var $propertyIsEnumerable = {}.propertyIsEnumerable;
   var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
@@ -26189,7 +26189,7 @@ var require_object_property_is_enumerable = __commonJS(function(exports) {
   } : $propertyIsEnumerable;
 });
 
-// node_modules/core-js/internals/create-property-descriptor.js
+// ../node_modules/core-js/internals/create-property-descriptor.js
 var require_create_property_descriptor = __commonJS(function(exports, module) {
   module.exports = function(bitmap, value) {
     return {
@@ -26201,7 +26201,7 @@ var require_create_property_descriptor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/function-uncurry-this.js
+// ../node_modules/core-js/internals/function-uncurry-this.js
 var require_function_uncurry_this = __commonJS(function(exports, module) {
   var NATIVE_BIND = require_function_bind_native();
   var FunctionPrototype = Function.prototype;
@@ -26214,7 +26214,7 @@ var require_function_uncurry_this = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/classof-raw.js
+// ../node_modules/core-js/internals/classof-raw.js
 var require_classof_raw = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var toString = uncurryThis({}.toString);
@@ -26224,7 +26224,7 @@ var require_classof_raw = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/indexed-object.js
+// ../node_modules/core-js/internals/indexed-object.js
 var require_indexed_object = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var fails = require_fails();
@@ -26238,14 +26238,14 @@ var require_indexed_object = __commonJS(function(exports, module) {
   } : $Object;
 });
 
-// node_modules/core-js/internals/is-null-or-undefined.js
+// ../node_modules/core-js/internals/is-null-or-undefined.js
 var require_is_null_or_undefined = __commonJS(function(exports, module) {
   module.exports = function(it) {
     return it === null || it === undefined;
   };
 });
 
-// node_modules/core-js/internals/require-object-coercible.js
+// ../node_modules/core-js/internals/require-object-coercible.js
 var require_require_object_coercible = __commonJS(function(exports, module) {
   var isNullOrUndefined = require_is_null_or_undefined();
   var $TypeError = TypeError;
@@ -26256,7 +26256,7 @@ var require_require_object_coercible = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-indexed-object.js
+// ../node_modules/core-js/internals/to-indexed-object.js
 var require_to_indexed_object = __commonJS(function(exports, module) {
   var IndexedObject = require_indexed_object();
   var requireObjectCoercible = require_require_object_coercible();
@@ -26265,7 +26265,7 @@ var require_to_indexed_object = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/is-callable.js
+// ../node_modules/core-js/internals/is-callable.js
 var require_is_callable = __commonJS(function(exports, module) {
   var documentAll = typeof document == "object" && document.all;
   module.exports = typeof documentAll == "undefined" && documentAll !== undefined ? function(argument) {
@@ -26275,7 +26275,7 @@ var require_is_callable = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/is-object.js
+// ../node_modules/core-js/internals/is-object.js
 var require_is_object = __commonJS(function(exports, module) {
   var isCallable = require_is_callable();
   module.exports = function(it) {
@@ -26283,7 +26283,7 @@ var require_is_object = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/get-built-in.js
+// ../node_modules/core-js/internals/get-built-in.js
 var require_get_built_in = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var isCallable = require_is_callable();
@@ -26295,13 +26295,13 @@ var require_get_built_in = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-is-prototype-of.js
+// ../node_modules/core-js/internals/object-is-prototype-of.js
 var require_object_is_prototype_of = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   module.exports = uncurryThis({}.isPrototypeOf);
 });
 
-// node_modules/core-js/internals/environment-user-agent.js
+// ../node_modules/core-js/internals/environment-user-agent.js
 var require_environment_user_agent = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var navigator2 = globalThis2.navigator;
@@ -26309,7 +26309,7 @@ var require_environment_user_agent = __commonJS(function(exports, module) {
   module.exports = userAgent ? String(userAgent) : "";
 });
 
-// node_modules/core-js/internals/environment-v8-version.js
+// ../node_modules/core-js/internals/environment-v8-version.js
 var require_environment_v8_version = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var userAgent = require_environment_user_agent();
@@ -26334,7 +26334,7 @@ var require_environment_v8_version = __commonJS(function(exports, module) {
   module.exports = version;
 });
 
-// node_modules/core-js/internals/symbol-constructor-detection.js
+// ../node_modules/core-js/internals/symbol-constructor-detection.js
 var require_symbol_constructor_detection = __commonJS(function(exports, module) {
   var V8_VERSION = require_environment_v8_version();
   var fails = require_fails();
@@ -26346,13 +26346,13 @@ var require_symbol_constructor_detection = __commonJS(function(exports, module) 
   });
 });
 
-// node_modules/core-js/internals/use-symbol-as-uid.js
+// ../node_modules/core-js/internals/use-symbol-as-uid.js
 var require_use_symbol_as_uid = __commonJS(function(exports, module) {
   var NATIVE_SYMBOL = require_symbol_constructor_detection();
   module.exports = NATIVE_SYMBOL && !Symbol.sham && typeof Symbol.iterator == "symbol";
 });
 
-// node_modules/core-js/internals/is-symbol.js
+// ../node_modules/core-js/internals/is-symbol.js
 var require_is_symbol = __commonJS(function(exports, module) {
   var getBuiltIn = require_get_built_in();
   var isCallable = require_is_callable();
@@ -26367,7 +26367,7 @@ var require_is_symbol = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/try-to-string.js
+// ../node_modules/core-js/internals/try-to-string.js
 var require_try_to_string = __commonJS(function(exports, module) {
   var $String = String;
   module.exports = function(argument) {
@@ -26379,7 +26379,7 @@ var require_try_to_string = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/a-callable.js
+// ../node_modules/core-js/internals/a-callable.js
 var require_a_callable = __commonJS(function(exports, module) {
   var isCallable = require_is_callable();
   var tryToString = require_try_to_string();
@@ -26391,7 +26391,7 @@ var require_a_callable = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/get-method.js
+// ../node_modules/core-js/internals/get-method.js
 var require_get_method = __commonJS(function(exports, module) {
   var aCallable = require_a_callable();
   var isNullOrUndefined = require_is_null_or_undefined();
@@ -26401,7 +26401,7 @@ var require_get_method = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/ordinary-to-primitive.js
+// ../node_modules/core-js/internals/ordinary-to-primitive.js
 var require_ordinary_to_primitive = __commonJS(function(exports, module) {
   var call = require_function_call();
   var isCallable = require_is_callable();
@@ -26419,12 +26419,12 @@ var require_ordinary_to_primitive = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/is-pure.js
+// ../node_modules/core-js/internals/is-pure.js
 var require_is_pure = __commonJS(function(exports, module) {
   module.exports = false;
 });
 
-// node_modules/core-js/internals/define-global-property.js
+// ../node_modules/core-js/internals/define-global-property.js
 var require_define_global_property = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var defineProperty = Object.defineProperty;
@@ -26438,7 +26438,7 @@ var require_define_global_property = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/shared-store.js
+// ../node_modules/core-js/internals/shared-store.js
 var require_shared_store = __commonJS(function(exports, module) {
   var IS_PURE = require_is_pure();
   var globalThis2 = require_global_this();
@@ -26454,7 +26454,7 @@ var require_shared_store = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/shared.js
+// ../node_modules/core-js/internals/shared.js
 var require_shared = __commonJS(function(exports, module) {
   var store = require_shared_store();
   var create = Object.create || Object;
@@ -26463,7 +26463,7 @@ var require_shared = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-object.js
+// ../node_modules/core-js/internals/to-object.js
 var require_to_object = __commonJS(function(exports, module) {
   var requireObjectCoercible = require_require_object_coercible();
   var $Object = Object;
@@ -26472,7 +26472,7 @@ var require_to_object = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/has-own-property.js
+// ../node_modules/core-js/internals/has-own-property.js
 var require_has_own_property = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var toObject = require_to_object();
@@ -26482,7 +26482,7 @@ var require_has_own_property = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/uid.js
+// ../node_modules/core-js/internals/uid.js
 var require_uid = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var id = 0;
@@ -26493,7 +26493,7 @@ var require_uid = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/well-known-symbol.js
+// ../node_modules/core-js/internals/well-known-symbol.js
 var require_well_known_symbol = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var shared = require_shared();
@@ -26512,7 +26512,7 @@ var require_well_known_symbol = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-primitive.js
+// ../node_modules/core-js/internals/to-primitive.js
 var require_to_primitive = __commonJS(function(exports, module) {
   var call = require_function_call();
   var isObject = require_is_object();
@@ -26541,7 +26541,7 @@ var require_to_primitive = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-property-key.js
+// ../node_modules/core-js/internals/to-property-key.js
 var require_to_property_key = __commonJS(function(exports, module) {
   var toPrimitive = require_to_primitive();
   var isSymbol = require_is_symbol();
@@ -26551,7 +26551,7 @@ var require_to_property_key = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/document-create-element.js
+// ../node_modules/core-js/internals/document-create-element.js
 var require_document_create_element = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var isObject = require_is_object();
@@ -26562,7 +26562,7 @@ var require_document_create_element = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/ie8-dom-define.js
+// ../node_modules/core-js/internals/ie8-dom-define.js
 var require_ie8_dom_define = __commonJS(function(exports, module) {
   var DESCRIPTORS = require_descriptors();
   var fails = require_fails();
@@ -26576,7 +26576,7 @@ var require_ie8_dom_define = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/object-get-own-property-descriptor.js
+// ../node_modules/core-js/internals/object-get-own-property-descriptor.js
 var require_object_get_own_property_descriptor = __commonJS(function(exports) {
   var DESCRIPTORS = require_descriptors();
   var call = require_function_call();
@@ -26599,7 +26599,7 @@ var require_object_get_own_property_descriptor = __commonJS(function(exports) {
   };
 });
 
-// node_modules/core-js/internals/v8-prototype-define-bug.js
+// ../node_modules/core-js/internals/v8-prototype-define-bug.js
 var require_v8_prototype_define_bug = __commonJS(function(exports, module) {
   var DESCRIPTORS = require_descriptors();
   var fails = require_fails();
@@ -26611,7 +26611,7 @@ var require_v8_prototype_define_bug = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/an-object.js
+// ../node_modules/core-js/internals/an-object.js
 var require_an_object = __commonJS(function(exports, module) {
   var isObject = require_is_object();
   var $String = String;
@@ -26623,7 +26623,7 @@ var require_an_object = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-define-property.js
+// ../node_modules/core-js/internals/object-define-property.js
 var require_object_define_property = __commonJS(function(exports) {
   var DESCRIPTORS = require_descriptors();
   var IE8_DOM_DEFINE = require_ie8_dom_define();
@@ -26668,7 +26668,7 @@ var require_object_define_property = __commonJS(function(exports) {
   };
 });
 
-// node_modules/core-js/internals/create-non-enumerable-property.js
+// ../node_modules/core-js/internals/create-non-enumerable-property.js
 var require_create_non_enumerable_property = __commonJS(function(exports, module) {
   var DESCRIPTORS = require_descriptors();
   var definePropertyModule = require_object_define_property();
@@ -26681,7 +26681,7 @@ var require_create_non_enumerable_property = __commonJS(function(exports, module
   };
 });
 
-// node_modules/core-js/internals/function-name.js
+// ../node_modules/core-js/internals/function-name.js
 var require_function_name = __commonJS(function(exports, module) {
   var DESCRIPTORS = require_descriptors();
   var hasOwn = require_has_own_property();
@@ -26697,7 +26697,7 @@ var require_function_name = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/inspect-source.js
+// ../node_modules/core-js/internals/inspect-source.js
 var require_inspect_source = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var isCallable = require_is_callable();
@@ -26711,7 +26711,7 @@ var require_inspect_source = __commonJS(function(exports, module) {
   module.exports = store.inspectSource;
 });
 
-// node_modules/core-js/internals/weak-map-basic-detection.js
+// ../node_modules/core-js/internals/weak-map-basic-detection.js
 var require_weak_map_basic_detection = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var isCallable = require_is_callable();
@@ -26719,7 +26719,7 @@ var require_weak_map_basic_detection = __commonJS(function(exports, module) {
   module.exports = isCallable(WeakMap2) && /native code/.test(String(WeakMap2));
 });
 
-// node_modules/core-js/internals/shared-key.js
+// ../node_modules/core-js/internals/shared-key.js
 var require_shared_key = __commonJS(function(exports, module) {
   var shared = require_shared();
   var uid = require_uid();
@@ -26729,12 +26729,12 @@ var require_shared_key = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/hidden-keys.js
+// ../node_modules/core-js/internals/hidden-keys.js
 var require_hidden_keys = __commonJS(function(exports, module) {
   module.exports = {};
 });
 
-// node_modules/core-js/internals/internal-state.js
+// ../node_modules/core-js/internals/internal-state.js
 var require_internal_state = __commonJS(function(exports, module) {
   var NATIVE_WEAK_MAP = require_weak_map_basic_detection();
   var globalThis2 = require_global_this();
@@ -26808,7 +26808,7 @@ var require_internal_state = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/make-built-in.js
+// ../node_modules/core-js/internals/make-built-in.js
 var require_make_built_in = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var fails = require_fails();
@@ -26864,7 +26864,7 @@ var require_make_built_in = __commonJS(function(exports, module) {
   }, "toString");
 });
 
-// node_modules/core-js/internals/define-built-in.js
+// ../node_modules/core-js/internals/define-built-in.js
 var require_define_built_in = __commonJS(function(exports, module) {
   var isCallable = require_is_callable();
   var definePropertyModule = require_object_define_property();
@@ -26903,7 +26903,7 @@ var require_define_built_in = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/math-trunc.js
+// ../node_modules/core-js/internals/math-trunc.js
 var require_math_trunc = __commonJS(function(exports, module) {
   var ceil = Math.ceil;
   var floor = Math.floor;
@@ -26913,7 +26913,7 @@ var require_math_trunc = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-integer-or-infinity.js
+// ../node_modules/core-js/internals/to-integer-or-infinity.js
 var require_to_integer_or_infinity = __commonJS(function(exports, module) {
   var trunc = require_math_trunc();
   module.exports = function(argument) {
@@ -26922,7 +26922,7 @@ var require_to_integer_or_infinity = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-absolute-index.js
+// ../node_modules/core-js/internals/to-absolute-index.js
 var require_to_absolute_index = __commonJS(function(exports, module) {
   var toIntegerOrInfinity = require_to_integer_or_infinity();
   var max = Math.max;
@@ -26933,7 +26933,7 @@ var require_to_absolute_index = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-length.js
+// ../node_modules/core-js/internals/to-length.js
 var require_to_length = __commonJS(function(exports, module) {
   var toIntegerOrInfinity = require_to_integer_or_infinity();
   var min = Math.min;
@@ -26943,7 +26943,7 @@ var require_to_length = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/length-of-array-like.js
+// ../node_modules/core-js/internals/length-of-array-like.js
 var require_length_of_array_like = __commonJS(function(exports, module) {
   var toLength = require_to_length();
   module.exports = function(obj) {
@@ -26951,7 +26951,7 @@ var require_length_of_array_like = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/array-includes.js
+// ../node_modules/core-js/internals/array-includes.js
 var require_array_includes = __commonJS(function(exports, module) {
   var toIndexedObject = require_to_indexed_object();
   var toAbsoluteIndex = require_to_absolute_index();
@@ -26984,7 +26984,7 @@ var require_array_includes = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-keys-internal.js
+// ../node_modules/core-js/internals/object-keys-internal.js
 var require_object_keys_internal = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var hasOwn = require_has_own_property();
@@ -27007,7 +27007,7 @@ var require_object_keys_internal = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/enum-bug-keys.js
+// ../node_modules/core-js/internals/enum-bug-keys.js
 var require_enum_bug_keys = __commonJS(function(exports, module) {
   module.exports = [
     "constructor",
@@ -27020,7 +27020,7 @@ var require_enum_bug_keys = __commonJS(function(exports, module) {
   ];
 });
 
-// node_modules/core-js/internals/object-get-own-property-names.js
+// ../node_modules/core-js/internals/object-get-own-property-names.js
 var require_object_get_own_property_names = __commonJS(function(exports) {
   var internalObjectKeys = require_object_keys_internal();
   var enumBugKeys = require_enum_bug_keys();
@@ -27030,12 +27030,12 @@ var require_object_get_own_property_names = __commonJS(function(exports) {
   };
 });
 
-// node_modules/core-js/internals/object-get-own-property-symbols.js
+// ../node_modules/core-js/internals/object-get-own-property-symbols.js
 var require_object_get_own_property_symbols = __commonJS(function(exports) {
   exports.f = Object.getOwnPropertySymbols;
 });
 
-// node_modules/core-js/internals/own-keys.js
+// ../node_modules/core-js/internals/own-keys.js
 var require_own_keys = __commonJS(function(exports, module) {
   var getBuiltIn = require_get_built_in();
   var uncurryThis = require_function_uncurry_this();
@@ -27050,7 +27050,7 @@ var require_own_keys = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/copy-constructor-properties.js
+// ../node_modules/core-js/internals/copy-constructor-properties.js
 var require_copy_constructor_properties = __commonJS(function(exports, module) {
   var hasOwn = require_has_own_property();
   var ownKeys = require_own_keys();
@@ -27069,7 +27069,7 @@ var require_copy_constructor_properties = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/is-forced.js
+// ../node_modules/core-js/internals/is-forced.js
 var require_is_forced = __commonJS(function(exports, module) {
   var fails = require_fails();
   var isCallable = require_is_callable();
@@ -27087,7 +27087,7 @@ var require_is_forced = __commonJS(function(exports, module) {
   module.exports = isForced;
 });
 
-// node_modules/core-js/internals/export.js
+// ../node_modules/core-js/internals/export.js
 var require_export = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var getOwnPropertyDescriptor = require_object_get_own_property_descriptor().f;
@@ -27130,7 +27130,7 @@ var require_export = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/environment.js
+// ../node_modules/core-js/internals/environment.js
 var require_environment = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var userAgent = require_environment_user_agent();
@@ -27159,19 +27159,19 @@ var require_environment = __commonJS(function(exports, module) {
   }();
 });
 
-// node_modules/core-js/internals/environment-is-node.js
+// ../node_modules/core-js/internals/environment-is-node.js
 var require_environment_is_node = __commonJS(function(exports, module) {
   var ENVIRONMENT = require_environment();
   module.exports = ENVIRONMENT === "NODE";
 });
 
-// node_modules/core-js/internals/path.js
+// ../node_modules/core-js/internals/path.js
 var require_path = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   module.exports = globalThis2;
 });
 
-// node_modules/core-js/internals/function-uncurry-this-accessor.js
+// ../node_modules/core-js/internals/function-uncurry-this-accessor.js
 var require_function_uncurry_this_accessor = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var aCallable = require_a_callable();
@@ -27182,7 +27182,7 @@ var require_function_uncurry_this_accessor = __commonJS(function(exports, module
   };
 });
 
-// node_modules/core-js/internals/is-possible-prototype.js
+// ../node_modules/core-js/internals/is-possible-prototype.js
 var require_is_possible_prototype = __commonJS(function(exports, module) {
   var isObject = require_is_object();
   module.exports = function(argument) {
@@ -27190,7 +27190,7 @@ var require_is_possible_prototype = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/a-possible-prototype.js
+// ../node_modules/core-js/internals/a-possible-prototype.js
 var require_a_possible_prototype = __commonJS(function(exports, module) {
   var isPossiblePrototype = require_is_possible_prototype();
   var $String = String;
@@ -27202,7 +27202,7 @@ var require_a_possible_prototype = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-set-prototype-of.js
+// ../node_modules/core-js/internals/object-set-prototype-of.js
 var require_object_set_prototype_of = __commonJS(function(exports, module) {
   var uncurryThisAccessor = require_function_uncurry_this_accessor();
   var isObject = require_is_object();
@@ -27231,7 +27231,7 @@ var require_object_set_prototype_of = __commonJS(function(exports, module) {
   }() : undefined);
 });
 
-// node_modules/core-js/internals/set-to-string-tag.js
+// ../node_modules/core-js/internals/set-to-string-tag.js
 var require_set_to_string_tag = __commonJS(function(exports, module) {
   var defineProperty = require_object_define_property().f;
   var hasOwn = require_has_own_property();
@@ -27246,7 +27246,7 @@ var require_set_to_string_tag = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/define-built-in-accessor.js
+// ../node_modules/core-js/internals/define-built-in-accessor.js
 var require_define_built_in_accessor = __commonJS(function(exports, module) {
   var makeBuiltIn = require_make_built_in();
   var defineProperty = require_object_define_property();
@@ -27259,7 +27259,7 @@ var require_define_built_in_accessor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/set-species.js
+// ../node_modules/core-js/internals/set-species.js
 var require_set_species = __commonJS(function(exports, module) {
   var getBuiltIn = require_get_built_in();
   var defineBuiltInAccessor = require_define_built_in_accessor();
@@ -27279,7 +27279,7 @@ var require_set_species = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/an-instance.js
+// ../node_modules/core-js/internals/an-instance.js
 var require_an_instance = __commonJS(function(exports, module) {
   var isPrototypeOf = require_object_is_prototype_of();
   var $TypeError = TypeError;
@@ -27290,7 +27290,7 @@ var require_an_instance = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/to-string-tag-support.js
+// ../node_modules/core-js/internals/to-string-tag-support.js
 var require_to_string_tag_support = __commonJS(function(exports, module) {
   var wellKnownSymbol = require_well_known_symbol();
   var TO_STRING_TAG = wellKnownSymbol("toStringTag");
@@ -27299,7 +27299,7 @@ var require_to_string_tag_support = __commonJS(function(exports, module) {
   module.exports = String(test) === "[object z]";
 });
 
-// node_modules/core-js/internals/classof.js
+// ../node_modules/core-js/internals/classof.js
 var require_classof = __commonJS(function(exports, module) {
   var TO_STRING_TAG_SUPPORT = require_to_string_tag_support();
   var isCallable = require_is_callable();
@@ -27321,7 +27321,7 @@ var require_classof = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/is-constructor.js
+// ../node_modules/core-js/internals/is-constructor.js
 var require_is_constructor = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var fails = require_fails();
@@ -27368,7 +27368,7 @@ var require_is_constructor = __commonJS(function(exports, module) {
   }) ? isConstructorLegacy : isConstructorModern;
 });
 
-// node_modules/core-js/internals/a-constructor.js
+// ../node_modules/core-js/internals/a-constructor.js
 var require_a_constructor = __commonJS(function(exports, module) {
   var isConstructor = require_is_constructor();
   var tryToString = require_try_to_string();
@@ -27380,7 +27380,7 @@ var require_a_constructor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/species-constructor.js
+// ../node_modules/core-js/internals/species-constructor.js
 var require_species_constructor = __commonJS(function(exports, module) {
   var anObject = require_an_object();
   var aConstructor = require_a_constructor();
@@ -27394,7 +27394,7 @@ var require_species_constructor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/function-apply.js
+// ../node_modules/core-js/internals/function-apply.js
 var require_function_apply = __commonJS(function(exports, module) {
   var NATIVE_BIND = require_function_bind_native();
   var FunctionPrototype = Function.prototype;
@@ -27405,7 +27405,7 @@ var require_function_apply = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/function-uncurry-this-clause.js
+// ../node_modules/core-js/internals/function-uncurry-this-clause.js
 var require_function_uncurry_this_clause = __commonJS(function(exports, module) {
   var classofRaw = require_classof_raw();
   var uncurryThis = require_function_uncurry_this();
@@ -27415,7 +27415,7 @@ var require_function_uncurry_this_clause = __commonJS(function(exports, module) 
   };
 });
 
-// node_modules/core-js/internals/function-bind-context.js
+// ../node_modules/core-js/internals/function-bind-context.js
 var require_function_bind_context = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this_clause();
   var aCallable = require_a_callable();
@@ -27429,19 +27429,19 @@ var require_function_bind_context = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/html.js
+// ../node_modules/core-js/internals/html.js
 var require_html = __commonJS(function(exports, module) {
   var getBuiltIn = require_get_built_in();
   module.exports = getBuiltIn("document", "documentElement");
 });
 
-// node_modules/core-js/internals/array-slice.js
+// ../node_modules/core-js/internals/array-slice.js
 var require_array_slice = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   module.exports = uncurryThis([].slice);
 });
 
-// node_modules/core-js/internals/validate-arguments-length.js
+// ../node_modules/core-js/internals/validate-arguments-length.js
 var require_validate_arguments_length = __commonJS(function(exports, module) {
   var $TypeError = TypeError;
   module.exports = function(passed, required) {
@@ -27451,13 +27451,13 @@ var require_validate_arguments_length = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/environment-is-ios.js
+// ../node_modules/core-js/internals/environment-is-ios.js
 var require_environment_is_ios = __commonJS(function(exports, module) {
   var userAgent = require_environment_user_agent();
   module.exports = /ipad|iphone|ipod/i.test(userAgent) && /applewebkit/i.test(userAgent);
 });
 
-// node_modules/core-js/internals/task.js
+// ../node_modules/core-js/internals/task.js
 var require_task = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var apply = require_function_apply();
@@ -27555,7 +27555,7 @@ var require_task = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/safe-get-built-in.js
+// ../node_modules/core-js/internals/safe-get-built-in.js
 var require_safe_get_built_in = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var DESCRIPTORS = require_descriptors();
@@ -27568,7 +27568,7 @@ var require_safe_get_built_in = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/queue.js
+// ../node_modules/core-js/internals/queue.js
 var require_queue = __commonJS(function(exports, module) {
   var Queue = function() {
     this.head = null;
@@ -27597,19 +27597,19 @@ var require_queue = __commonJS(function(exports, module) {
   module.exports = Queue;
 });
 
-// node_modules/core-js/internals/environment-is-ios-pebble.js
+// ../node_modules/core-js/internals/environment-is-ios-pebble.js
 var require_environment_is_ios_pebble = __commonJS(function(exports, module) {
   var userAgent = require_environment_user_agent();
   module.exports = /ipad|iphone|ipod/i.test(userAgent) && typeof Pebble != "undefined";
 });
 
-// node_modules/core-js/internals/environment-is-webos-webkit.js
+// ../node_modules/core-js/internals/environment-is-webos-webkit.js
 var require_environment_is_webos_webkit = __commonJS(function(exports, module) {
   var userAgent = require_environment_user_agent();
   module.exports = /web0s(?!.*chrome)/i.test(userAgent);
 });
 
-// node_modules/core-js/internals/microtask.js
+// ../node_modules/core-js/internals/microtask.js
 var require_microtask = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var safeGetBuiltIn = require_safe_get_built_in();
@@ -27682,7 +27682,7 @@ var require_microtask = __commonJS(function(exports, module) {
   module.exports = microtask;
 });
 
-// node_modules/core-js/internals/host-report-errors.js
+// ../node_modules/core-js/internals/host-report-errors.js
 var require_host_report_errors = __commonJS(function(exports, module) {
   module.exports = function(a, b) {
     try {
@@ -27691,7 +27691,7 @@ var require_host_report_errors = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/perform.js
+// ../node_modules/core-js/internals/perform.js
 var require_perform = __commonJS(function(exports, module) {
   module.exports = function(exec) {
     try {
@@ -27702,13 +27702,13 @@ var require_perform = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/promise-native-constructor.js
+// ../node_modules/core-js/internals/promise-native-constructor.js
 var require_promise_native_constructor = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   module.exports = globalThis2.Promise;
 });
 
-// node_modules/core-js/internals/promise-constructor-detection.js
+// ../node_modules/core-js/internals/promise-constructor-detection.js
 var require_promise_constructor_detection = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var NativePromiseConstructor = require_promise_native_constructor();
@@ -27752,7 +27752,7 @@ var require_promise_constructor_detection = __commonJS(function(exports, module)
   };
 });
 
-// node_modules/core-js/internals/new-promise-capability.js
+// ../node_modules/core-js/internals/new-promise-capability.js
 var require_new_promise_capability = __commonJS(function(exports, module) {
   var aCallable = require_a_callable();
   var $TypeError = TypeError;
@@ -27772,7 +27772,7 @@ var require_new_promise_capability = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.promise.constructor.js
+// ../node_modules/core-js/modules/es.promise.constructor.js
 var require_es_promise_constructor = __commonJS(function() {
   var $ = require_export();
   var IS_PURE = require_is_pure();
@@ -28048,12 +28048,12 @@ var require_es_promise_constructor = __commonJS(function() {
   setSpecies(PROMISE);
 });
 
-// node_modules/core-js/internals/iterators.js
+// ../node_modules/core-js/internals/iterators.js
 var require_iterators = __commonJS(function(exports, module) {
   module.exports = Object.create ? Object.create(null) : {};
 });
 
-// node_modules/core-js/internals/is-array-iterator-method.js
+// ../node_modules/core-js/internals/is-array-iterator-method.js
 var require_is_array_iterator_method = __commonJS(function(exports, module) {
   var wellKnownSymbol = require_well_known_symbol();
   var Iterators = require_iterators();
@@ -28064,7 +28064,7 @@ var require_is_array_iterator_method = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/get-iterator-method-internal.js
+// ../node_modules/core-js/internals/get-iterator-method-internal.js
 var require_get_iterator_method_internal = __commonJS(function(exports, module) {
   var classof = require_classof_raw();
   var isNullOrUndefined = require_is_null_or_undefined();
@@ -28078,7 +28078,7 @@ var require_get_iterator_method_internal = __commonJS(function(exports, module) 
   };
 });
 
-// node_modules/core-js/internals/get-iterator-internal.js
+// ../node_modules/core-js/internals/get-iterator-internal.js
 var require_get_iterator_internal = __commonJS(function(exports, module) {
   var call = require_function_call();
   var isCallable = require_is_callable();
@@ -28094,7 +28094,7 @@ var require_get_iterator_internal = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/iterator-close.js
+// ../node_modules/core-js/internals/iterator-close.js
 var require_iterator_close = __commonJS(function(exports, module) {
   var call = require_function_call();
   var anObject = require_an_object();
@@ -28123,7 +28123,7 @@ var require_iterator_close = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/iterate.js
+// ../node_modules/core-js/internals/iterate.js
 var require_iterate = __commonJS(function(exports, module) {
   var bind = require_function_bind_context();
   var call = require_function_call();
@@ -28199,7 +28199,7 @@ var require_iterate = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/check-correctness-of-iteration.js
+// ../node_modules/core-js/internals/check-correctness-of-iteration.js
 var require_check_correctness_of_iteration = __commonJS(function(exports, module) {
   var wellKnownSymbol = require_well_known_symbol();
   var ITERATOR = wellKnownSymbol("iterator");
@@ -28246,7 +28246,7 @@ var require_check_correctness_of_iteration = __commonJS(function(exports, module
   };
 });
 
-// node_modules/core-js/internals/promise-statics-incorrect-iteration.js
+// ../node_modules/core-js/internals/promise-statics-incorrect-iteration.js
 var require_promise_statics_incorrect_iteration = __commonJS(function(exports, module) {
   var NativePromiseConstructor = require_promise_native_constructor();
   var checkCorrectnessOfIteration = require_check_correctness_of_iteration();
@@ -28256,7 +28256,7 @@ var require_promise_statics_incorrect_iteration = __commonJS(function(exports, m
   });
 });
 
-// node_modules/core-js/modules/es.promise.all.js
+// ../node_modules/core-js/modules/es.promise.all.js
 var require_es_promise_all = __commonJS(function() {
   var $ = require_export();
   var call = require_function_call();
@@ -28297,7 +28297,7 @@ var require_es_promise_all = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.promise.catch.js
+// ../node_modules/core-js/modules/es.promise.catch.js
 var require_es_promise_catch = __commonJS(function() {
   var $ = require_export();
   var IS_PURE = require_is_pure();
@@ -28321,7 +28321,7 @@ var require_es_promise_catch = __commonJS(function() {
   var method;
 });
 
-// node_modules/core-js/modules/es.promise.race.js
+// ../node_modules/core-js/modules/es.promise.race.js
 var require_es_promise_race = __commonJS(function() {
   var $ = require_export();
   var call = require_function_call();
@@ -28348,7 +28348,7 @@ var require_es_promise_race = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.promise.reject.js
+// ../node_modules/core-js/modules/es.promise.reject.js
 var require_es_promise_reject = __commonJS(function() {
   var $ = require_export();
   var newPromiseCapabilityModule = require_new_promise_capability();
@@ -28363,7 +28363,7 @@ var require_es_promise_reject = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/internals/promise-resolve.js
+// ../node_modules/core-js/internals/promise-resolve.js
 var require_promise_resolve = __commonJS(function(exports, module) {
   var anObject = require_an_object();
   var isObject = require_is_object();
@@ -28379,7 +28379,7 @@ var require_promise_resolve = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.promise.resolve.js
+// ../node_modules/core-js/modules/es.promise.resolve.js
 var require_es_promise_resolve = __commonJS(function() {
   var $ = require_export();
   var getBuiltIn = require_get_built_in();
@@ -28396,7 +28396,7 @@ var require_es_promise_resolve = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.promise.js
+// ../node_modules/core-js/modules/es.promise.js
 var require_es_promise = __commonJS(function() {
   require_es_promise_constructor();
   require_es_promise_all();
@@ -28406,7 +28406,7 @@ var require_es_promise = __commonJS(function() {
   require_es_promise_resolve();
 });
 
-// node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+// ../node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 function asyncGeneratorStep(n, t, e, r, o, a, c) {
   try {
     var i = n[a](c), u = i.value;
@@ -28432,7 +28432,7 @@ function _asyncToGenerator(n) {
 }
 var init_asyncToGenerator = () => {};
 
-// node_modules/core-js/internals/to-string.js
+// ../node_modules/core-js/internals/to-string.js
 var require_to_string = __commonJS(function(exports, module) {
   var classof = require_classof();
   var $String = String;
@@ -28443,7 +28443,7 @@ var require_to_string = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/regexp-flags.js
+// ../node_modules/core-js/internals/regexp-flags.js
 var require_regexp_flags = __commonJS(function(exports, module) {
   var anObject = require_an_object();
   module.exports = function() {
@@ -28469,7 +28469,7 @@ var require_regexp_flags = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/regexp-sticky-helpers.js
+// ../node_modules/core-js/internals/regexp-sticky-helpers.js
 var require_regexp_sticky_helpers = __commonJS(function(exports, module) {
   var fails = require_fails();
   var globalThis2 = require_global_this();
@@ -28494,7 +28494,7 @@ var require_regexp_sticky_helpers = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-keys.js
+// ../node_modules/core-js/internals/object-keys.js
 var require_object_keys = __commonJS(function(exports, module) {
   var internalObjectKeys = require_object_keys_internal();
   var enumBugKeys = require_enum_bug_keys();
@@ -28503,7 +28503,7 @@ var require_object_keys = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/object-define-properties.js
+// ../node_modules/core-js/internals/object-define-properties.js
 var require_object_define_properties = __commonJS(function(exports) {
   var DESCRIPTORS = require_descriptors();
   var V8_PROTOTYPE_DEFINE_BUG = require_v8_prototype_define_bug();
@@ -28524,7 +28524,7 @@ var require_object_define_properties = __commonJS(function(exports) {
   };
 });
 
-// node_modules/core-js/internals/object-create.js
+// ../node_modules/core-js/internals/object-create.js
 var require_object_create = __commonJS(function(exports, module) {
   var anObject = require_an_object();
   var definePropertiesModule = require_object_define_properties();
@@ -28587,7 +28587,7 @@ var require_object_create = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/regexp-unsupported-dot-all.js
+// ../node_modules/core-js/internals/regexp-unsupported-dot-all.js
 var require_regexp_unsupported_dot_all = __commonJS(function(exports, module) {
   var fails = require_fails();
   var globalThis2 = require_global_this();
@@ -28599,7 +28599,7 @@ var require_regexp_unsupported_dot_all = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/regexp-unsupported-ncg.js
+// ../node_modules/core-js/internals/regexp-unsupported-ncg.js
 var require_regexp_unsupported_ncg = __commonJS(function(exports, module) {
   var fails = require_fails();
   var globalThis2 = require_global_this();
@@ -28610,7 +28610,7 @@ var require_regexp_unsupported_ncg = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/regexp-exec.js
+// ../node_modules/core-js/internals/regexp-exec.js
 var require_regexp_exec = __commonJS(function(exports, module) {
   var call = require_function_call();
   var uncurryThis = require_function_uncurry_this();
@@ -28715,7 +28715,7 @@ var require_regexp_exec = __commonJS(function(exports, module) {
   module.exports = patchedExec;
 });
 
-// node_modules/core-js/modules/es.regexp.exec.js
+// ../node_modules/core-js/modules/es.regexp.exec.js
 var require_es_regexp_exec = __commonJS(function() {
   var $ = require_export();
   var exec = require_regexp_exec();
@@ -28724,7 +28724,7 @@ var require_es_regexp_exec = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js
+// ../node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js
 var require_fix_regexp_well_known_symbol_logic = __commonJS(function(exports, module) {
   require_es_regexp_exec();
   var call = require_function_call();
@@ -28782,7 +28782,7 @@ var require_fix_regexp_well_known_symbol_logic = __commonJS(function(exports, mo
   };
 });
 
-// node_modules/core-js/internals/string-multibyte.js
+// ../node_modules/core-js/internals/string-multibyte.js
 var require_string_multibyte = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var toIntegerOrInfinity = require_to_integer_or_infinity();
@@ -28809,7 +28809,7 @@ var require_string_multibyte = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/advance-string-index.js
+// ../node_modules/core-js/internals/advance-string-index.js
 var require_advance_string_index = __commonJS(function(exports, module) {
   var charAt = require_string_multibyte().charAt;
   module.exports = function(S, index, unicode) {
@@ -28817,7 +28817,7 @@ var require_advance_string_index = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/regexp-flags-detection.js
+// ../node_modules/core-js/internals/regexp-flags-detection.js
 var require_regexp_flags_detection = __commonJS(function(exports, module) {
   var globalThis2 = require_global_this();
   var fails = require_fails();
@@ -28855,7 +28855,7 @@ var require_regexp_flags_detection = __commonJS(function(exports, module) {
   module.exports = { correct: FLAGS_GETTER_IS_CORRECT };
 });
 
-// node_modules/core-js/internals/regexp-get-flags.js
+// ../node_modules/core-js/internals/regexp-get-flags.js
 var require_regexp_get_flags = __commonJS(function(exports, module) {
   var call = require_function_call();
   var hasOwn = require_has_own_property();
@@ -28870,7 +28870,7 @@ var require_regexp_get_flags = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/regexp-exec-abstract.js
+// ../node_modules/core-js/internals/regexp-exec-abstract.js
 var require_regexp_exec_abstract = __commonJS(function(exports, module) {
   var call = require_function_call();
   var anObject = require_an_object();
@@ -28892,7 +28892,7 @@ var require_regexp_exec_abstract = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.string.match.js
+// ../node_modules/core-js/modules/es.string.match.js
 var require_es_string_match = __commonJS(function() {
   var call = require_function_call();
   var uncurryThis = require_function_uncurry_this();
@@ -28944,7 +28944,7 @@ var require_es_string_match = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/internals/get-substitution.js
+// ../node_modules/core-js/internals/get-substitution.js
 var require_get_substitution = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var toObject = require_to_object();
@@ -28995,7 +28995,7 @@ var require_get_substitution = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.string.replace.js
+// ../node_modules/core-js/modules/es.string.replace.js
 var require_es_string_replace = __commonJS(function() {
   var apply = require_function_apply();
   var call = require_function_call();
@@ -29112,7 +29112,7 @@ var require_es_string_replace = __commonJS(function() {
   }, !REPLACE_SUPPORTS_NAMED_GROUPS || !REPLACE_KEEPS_$0 || REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE);
 });
 
-// node_modules/core-js/internals/is-regexp.js
+// ../node_modules/core-js/internals/is-regexp.js
 var require_is_regexp = __commonJS(function(exports, module) {
   var isObject = require_is_object();
   var classof = require_classof_raw();
@@ -29124,7 +29124,7 @@ var require_is_regexp = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/not-a-regexp.js
+// ../node_modules/core-js/internals/not-a-regexp.js
 var require_not_a_regexp = __commonJS(function(exports, module) {
   var isRegExp = require_is_regexp();
   var $TypeError = TypeError;
@@ -29136,7 +29136,7 @@ var require_not_a_regexp = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/correct-is-regexp-logic.js
+// ../node_modules/core-js/internals/correct-is-regexp-logic.js
 var require_correct_is_regexp_logic = __commonJS(function(exports, module) {
   var wellKnownSymbol = require_well_known_symbol();
   var MATCH = wellKnownSymbol("match");
@@ -29154,7 +29154,7 @@ var require_correct_is_regexp_logic = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.string.starts-with.js
+// ../node_modules/core-js/modules/es.string.starts-with.js
 var require_es_string_starts_with = __commonJS(function() {
   var $ = require_export();
   var uncurryThis = require_function_uncurry_this_clause();
@@ -29183,7 +29183,7 @@ var require_es_string_starts_with = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/internals/add-to-unscopables.js
+// ../node_modules/core-js/internals/add-to-unscopables.js
 var require_add_to_unscopables = __commonJS(function(exports, module) {
   var wellKnownSymbol = require_well_known_symbol();
   var create = require_object_create();
@@ -29201,7 +29201,7 @@ var require_add_to_unscopables = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/correct-prototype-getter.js
+// ../node_modules/core-js/internals/correct-prototype-getter.js
 var require_correct_prototype_getter = __commonJS(function(exports, module) {
   var fails = require_fails();
   module.exports = !fails(function() {
@@ -29211,7 +29211,7 @@ var require_correct_prototype_getter = __commonJS(function(exports, module) {
   });
 });
 
-// node_modules/core-js/internals/object-get-prototype-of.js
+// ../node_modules/core-js/internals/object-get-prototype-of.js
 var require_object_get_prototype_of = __commonJS(function(exports, module) {
   var hasOwn = require_has_own_property();
   var isCallable = require_is_callable();
@@ -29233,7 +29233,7 @@ var require_object_get_prototype_of = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/iterators-core.js
+// ../node_modules/core-js/internals/iterators-core.js
 var require_iterators_core = __commonJS(function(exports, module) {
   var fails = require_fails();
   var isCallable = require_is_callable();
@@ -29277,7 +29277,7 @@ var require_iterators_core = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/iterator-create-constructor.js
+// ../node_modules/core-js/internals/iterator-create-constructor.js
 var require_iterator_create_constructor = __commonJS(function(exports, module) {
   var IteratorPrototype = require_iterators_core().IteratorPrototype;
   var create = require_object_create();
@@ -29296,7 +29296,7 @@ var require_iterator_create_constructor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/iterator-define.js
+// ../node_modules/core-js/internals/iterator-define.js
 var require_iterator_define = __commonJS(function(exports, module) {
   var $ = require_export();
   var call = require_function_call();
@@ -29403,14 +29403,14 @@ var require_iterator_define = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/create-iter-result-object.js
+// ../node_modules/core-js/internals/create-iter-result-object.js
 var require_create_iter_result_object = __commonJS(function(exports, module) {
   module.exports = function(value, done) {
     return { value, done };
   };
 });
 
-// node_modules/core-js/modules/es.array.iterator.js
+// ../node_modules/core-js/modules/es.array.iterator.js
 var require_es_array_iterator = __commonJS(function(exports, module) {
   var toIndexedObject = require_to_indexed_object();
   var addToUnscopables = require_add_to_unscopables();
@@ -29457,7 +29457,7 @@ var require_es_array_iterator = __commonJS(function(exports, module) {
     } catch (error) {}
 });
 
-// node_modules/core-js/internals/dom-iterables.js
+// ../node_modules/core-js/internals/dom-iterables.js
 var require_dom_iterables = __commonJS(function(exports, module) {
   module.exports = {
     CSSRuleList: 0,
@@ -29494,7 +29494,7 @@ var require_dom_iterables = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/dom-token-list-prototype.js
+// ../node_modules/core-js/internals/dom-token-list-prototype.js
 var require_dom_token_list_prototype = __commonJS(function(exports, module) {
   var documentCreateElement = require_document_create_element();
   var classList = documentCreateElement("span").classList;
@@ -29502,7 +29502,7 @@ var require_dom_token_list_prototype = __commonJS(function(exports, module) {
   module.exports = DOMTokenListPrototype === Object.prototype ? undefined : DOMTokenListPrototype;
 });
 
-// node_modules/core-js/modules/web.dom-collections.iterator.js
+// ../node_modules/core-js/modules/web.dom-collections.iterator.js
 var require_web_dom_collections_iterator = __commonJS(function() {
   var globalThis2 = require_global_this();
   var DOMIterables = require_dom_iterables();
@@ -29540,7 +29540,7 @@ var require_web_dom_collections_iterator = __commonJS(function() {
   handlePrototype(DOMTokenListPrototype, "DOMTokenList");
 });
 
-// node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+// ../node_modules/@babel/runtime/helpers/esm/toPrimitive.js
 function toPrimitive(t, e) {
   if (_typeof(t) != "object" || !t)
     return t;
@@ -29557,7 +29557,7 @@ var init_toPrimitive = __esm(() => {
   init_typeof();
 });
 
-// node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+// ../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
 function toPropertyKey(t) {
   var i = toPrimitive(t, "string");
   return _typeof(i) == "symbol" ? i : i + "";
@@ -29567,7 +29567,7 @@ var init_toPropertyKey = __esm(() => {
   init_toPrimitive();
 });
 
-// node_modules/@babel/runtime/helpers/esm/defineProperty.js
+// ../node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(e, r, t) {
   return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
     value: t,
@@ -29580,7 +29580,7 @@ var init_defineProperty = __esm(() => {
   init_toPropertyKey();
 });
 
-// node_modules/core-js/internals/array-reduce.js
+// ../node_modules/core-js/internals/array-reduce.js
 var require_array_reduce = __commonJS(function(exports, module) {
   var aCallable = require_a_callable();
   var toObject = require_to_object();
@@ -29623,7 +29623,7 @@ var require_array_reduce = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/array-method-is-strict.js
+// ../node_modules/core-js/internals/array-method-is-strict.js
 var require_array_method_is_strict = __commonJS(function(exports, module) {
   var fails = require_fails();
   module.exports = function(METHOD_NAME, argument) {
@@ -29636,7 +29636,7 @@ var require_array_method_is_strict = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.array.reduce.js
+// ../node_modules/core-js/modules/es.array.reduce.js
 var require_es_array_reduce = __commonJS(function() {
   var $ = require_export();
   var $reduce = require_array_reduce().left;
@@ -29653,7 +29653,7 @@ var require_es_array_reduce = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.string.ends-with.js
+// ../node_modules/core-js/modules/es.string.ends-with.js
 var require_es_string_ends_with = __commonJS(function() {
   var $ = require_export();
   var uncurryThis = require_function_uncurry_this_clause();
@@ -29684,7 +29684,7 @@ var require_es_string_ends_with = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.string.split.js
+// ../node_modules/core-js/modules/es.string.split.js
 var require_es_string_split = __commonJS(function() {
   var call = require_function_call();
   var uncurryThis = require_function_uncurry_this();
@@ -29777,7 +29777,7 @@ var require_es_string_split = __commonJS(function() {
   }, BUGGY || !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC, UNSUPPORTED_Y);
 });
 
-// node_modules/performance-now/lib/performance-now.js
+// ../node_modules/performance-now/lib/performance-now.js
 var require_performance_now = __commonJS(function(exports, module) {
   (function() {
     var getNanoSeconds, hrtime, loadTime, moduleLoadTime, nodeLoadTime, upTime;
@@ -29812,7 +29812,7 @@ var require_performance_now = __commonJS(function(exports, module) {
   }).call(exports);
 });
 
-// node_modules/raf/index.js
+// ../node_modules/raf/index.js
 var require_raf = __commonJS(function(exports, module) {
   var now = require_performance_now();
   var root = typeof window === "undefined" ? global : window;
@@ -29881,13 +29881,13 @@ var require_raf = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/whitespaces.js
+// ../node_modules/core-js/internals/whitespaces.js
 var require_whitespaces = __commonJS(function(exports, module) {
   module.exports = `	
 \v\f\r      ` + "          　\u2028\u2029\uFEFF";
 });
 
-// node_modules/core-js/internals/string-trim.js
+// ../node_modules/core-js/internals/string-trim.js
 var require_string_trim = __commonJS(function(exports, module) {
   var uncurryThis = require_function_uncurry_this();
   var requireObjectCoercible = require_require_object_coercible();
@@ -29913,7 +29913,7 @@ var require_string_trim = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/internals/string-trim-forced.js
+// ../node_modules/core-js/internals/string-trim-forced.js
 var require_string_trim_forced = __commonJS(function(exports, module) {
   var PROPER_FUNCTION_NAME = require_function_name().PROPER;
   var fails = require_fails();
@@ -29926,7 +29926,7 @@ var require_string_trim_forced = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.string.trim.js
+// ../node_modules/core-js/modules/es.string.trim.js
 var require_es_string_trim = __commonJS(function() {
   var $ = require_export();
   var $trim = require_string_trim().trim;
@@ -29938,7 +29938,7 @@ var require_es_string_trim = __commonJS(function() {
   });
 });
 
-// node_modules/rgbcolor/index.js
+// ../node_modules/rgbcolor/index.js
 var require_rgbcolor = __commonJS(function(exports, module) {
   module.exports = function(color_string) {
     this.ok = false;
@@ -30210,7 +30210,7 @@ var require_rgbcolor = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.array.index-of.js
+// ../node_modules/core-js/modules/es.array.index-of.js
 var require_es_array_index_of = __commonJS(function() {
   var $ = require_export();
   var uncurryThis = require_function_uncurry_this_clause();
@@ -30227,7 +30227,7 @@ var require_es_array_index_of = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/modules/es.string.includes.js
+// ../node_modules/core-js/modules/es.string.includes.js
 var require_es_string_includes = __commonJS(function() {
   var $ = require_export();
   var uncurryThis = require_function_uncurry_this();
@@ -30243,7 +30243,7 @@ var require_es_string_includes = __commonJS(function() {
   });
 });
 
-// node_modules/core-js/internals/is-array.js
+// ../node_modules/core-js/internals/is-array.js
 var require_is_array = __commonJS(function(exports, module) {
   var classof = require_classof_raw();
   module.exports = Array.isArray || function isArray(argument) {
@@ -30251,7 +30251,7 @@ var require_is_array = __commonJS(function(exports, module) {
   };
 });
 
-// node_modules/core-js/modules/es.array.reverse.js
+// ../node_modules/core-js/modules/es.array.reverse.js
 var require_es_array_reverse = __commonJS(function() {
   var $ = require_export();
   var uncurryThis = require_function_uncurry_this();
@@ -30267,7 +30267,7 @@ var require_es_array_reverse = __commonJS(function() {
   });
 });
 
-// node_modules/svg-pathdata/lib/SVGPathData.module.js
+// ../node_modules/svg-pathdata/lib/SVGPathData.module.js
 function r(r, e) {
   if (typeof e != "function" && e !== null)
     throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
@@ -30714,7 +30714,7 @@ var init_SVGPathData_module = __esm(() => {
   N = ((O = {})[_.MOVE_TO] = 2, O[_.LINE_TO] = 2, O[_.HORIZ_LINE_TO] = 1, O[_.VERT_LINE_TO] = 1, O[_.CLOSE_PATH] = 0, O[_.QUAD_TO] = 4, O[_.SMOOTH_QUAD_TO] = 2, O[_.CURVE_TO] = 6, O[_.SMOOTH_CURVE_TO] = 4, O[_.ARC] = 7, O);
 });
 
-// node_modules/core-js/modules/es.regexp.to-string.js
+// ../node_modules/core-js/modules/es.regexp.to-string.js
 var require_es_regexp_to_string = __commonJS(function() {
   var PROPER_FUNCTION_NAME = require_function_name().PROPER;
   var defineBuiltIn = require_define_built_in();
@@ -30739,7 +30739,7 @@ var require_es_regexp_to_string = __commonJS(function() {
   }
 });
 
-// node_modules/stackblur-canvas/dist/stackblur-es.js
+// ../node_modules/stackblur-canvas/dist/stackblur-es.js
 function _typeof2(obj) {
   "@babel/helpers - typeof";
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -30956,7 +30956,7 @@ var init_stackblur_es = __esm(() => {
   shgTable = [9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24];
 });
 
-// node_modules/canvg/lib/index.es.js
+// ../node_modules/canvg/lib/index.es.js
 var exports_index_es = {};
 __export(exports_index_es, {
   AElement: () => AElement,
@@ -36217,7 +36217,7 @@ var init_index_es = __esm(() => {
   Document.elementTypes = elements;
 });
 
-// src/public/parsegml/parse-gml.ts
+// public/parsegml/parse-gml.ts
 var import_proj4 = __toESM(require_proj4_src());
 function parseCoords(s, crs) {
   const stride = 2;
@@ -36517,10 +36517,10 @@ Object.assign(parseGml, {
   parseMultiSurface
 });
 
-// src/public/map/mapview.ts
+// public/map/mapview.ts
 var import_leaflet = __toESM(require_leaflet_src());
 
-// node_modules/quickselect/index.js
+// ../node_modules/quickselect/index.js
 function quickselect(arr, k, left = 0, right = arr.length - 1, compare = defaultCompare) {
   while (right > left) {
     if (right - left > 600) {
@@ -36569,7 +36569,7 @@ function defaultCompare(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
-// node_modules/rbush/index.js
+// ../node_modules/rbush/index.js
 class RBush {
   constructor(maxEntries = 9) {
     this._maxEntries = Math.max(4, maxEntries);
@@ -36965,7 +36965,7 @@ function multiSelect(arr, left, right, n, compare) {
   }
 }
 
-// src/public/map/leaflet.canvaslabel.js
+// public/map/leaflet.canvaslabel.js
 var CanvasLabel = L.CanvasLabel = L.Canvas.extend({
   options: {
     defaultLabelStyle: {
@@ -37236,7 +37236,7 @@ var canvasLabel = L.canvasLabel = function(options) {
   return new L.CanvasLabel(options);
 };
 
-// src/public/map/TileLayer.ProjWMTS.js
+// public/map/TileLayer.ProjWMTS.js
 var import_proj42 = __toESM(require_proj4_src());
 L.TileLayer.ProjWMTS = L.TileLayer.extend({
   defaultWMTSParams: {
@@ -37501,11 +37501,11 @@ L.tileLayer.projwmts = function(url, options) {
   return new L.TileLayer.ProjWMTS(url, options);
 };
 
-// src/public/map/mapview.ts
+// public/map/mapview.ts
 var import_proj43 = __toESM(require_proj4_src());
 var import_proj4leaflet = __toESM(require_proj4leaflet());
 
-// node_modules/leaflet-easybutton/src/easy-button.js
+// ../node_modules/leaflet-easybutton/src/easy-button.js
 (function() {
   L.Control.EasyBar = L.Control.extend({
     options: {
@@ -37733,7 +37733,7 @@ var import_proj4leaflet = __toESM(require_proj4leaflet());
   }
 })();
 
-// src/public/egib/adresy-nieruchomosci.ts
+// public/egib/adresy-nieruchomosci.ts
 function getAdresNieruchomosciSkr(id) {
   let ret = "";
   const obj = egbFeatures.adresyNieruchomosci.get(id);
@@ -37813,7 +37813,7 @@ function pokazAdresNieruchomosci(id) {
   }
 }
 
-// src/public/egib/adresy-podmiotu.ts
+// public/egib/adresy-podmiotu.ts
 function getAdresPodmiotuSkr(id) {
   let ret = "";
   const obj = egbFeatures.adresyPodmiotu.get(id);
@@ -37841,7 +37841,7 @@ function getAdresPodmiotuSkr(id) {
       ret += "/" + obj.numerLokalu;
     }
   } else {
-    ret += '<span class="error-inline">Brak adresu zameldowanie o podanym gml id</span>';
+    ret += '<span class="error-inline">Brak adresu podmiotu o podanym gml id</span>';
   }
   return ret;
 }
@@ -37891,7 +37891,7 @@ function pokazAdresPodmiotu(id) {
   if (obj) {
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
-      let html = '<div class="div-title"><span class="item">Adres zameldowania: </span></div>';
+      let html = '<div class="div-title"><span class="item">Adres podmiotu: </span></div>';
       html += '<div class="grid-container">';
       html += getOgolnyObiekt(obj);
       html += getAdres2(obj);
@@ -37902,7 +37902,7 @@ function pokazAdresPodmiotu(id) {
   }
 }
 
-// src/public/egib/common-functions.ts
+// public/egib/common-functions.ts
 function idIIPtoText(obj) {
   let ret = "";
   const tempId = obj.EGB_IdentyfikatorIIP;
@@ -38196,7 +38196,7 @@ function getIdPunktuGranicznego(id) {
   return ret;
 }
 
-// src/public/egib/punkty-graniczne.ts
+// public/egib/punkty-graniczne.ts
 var EGB_KodStabilizacji = {
   "1": "brak informacji",
   "2": "niestabilizowany",
@@ -38309,7 +38309,7 @@ function pokazPunkt(id) {
   }
 }
 
-// src/public/egib/obiekty-trwale-zwiazane-z-budynkiem.ts
+// public/egib/obiekty-trwale-zwiazane-z-budynkiem.ts
 var EGB_RodzajObiektu = {
   t: "taras",
   w: "weranda/ganek",
@@ -38368,7 +38368,7 @@ function pokazObiektZwiazanyZBudynkiem(id) {
   }
 }
 
-// src/public/egib/bloki-budynku.ts
+// public/egib/bloki-budynku.ts
 var EGB_RodzajBloku = {
   n: "kondygnacje nadziemne",
   p: "kondygnacje podziemne",
@@ -38446,7 +38446,7 @@ function pokazBlokBudynku(id) {
   }
 }
 
-// src/public/egib/osoby-fizyczne.ts
+// public/egib/osoby-fizyczne.ts
 var EGB_Plec = {
   "1": "męska",
   "2": "żeńska"
@@ -38579,7 +38579,7 @@ function pokazOsobeFizyczna(id) {
   }
 }
 
-// src/public/egib/instytucje.ts
+// public/egib/instytucje.ts
 function getInstytucjaSkr(id) {
   let ret = "";
   const obj = egbFeatures.instytucje.get(id);
@@ -38667,7 +38667,7 @@ function pokazInstytucje(id) {
   }
 }
 
-// src/public/egib/malzenstwa.ts
+// public/egib/malzenstwa.ts
 function getMalzenstwoSkr(id) {
   let ret = "";
   const obj = egbFeatures.malzenstwa.get(id);
@@ -38739,7 +38739,7 @@ function pokazMalzenstwo(id) {
   }
 }
 
-// src/public/egib/podmioty-grupowe.ts
+// public/egib/podmioty-grupowe.ts
 function getPodmiotGrupowySkr(id) {
   let ret = "";
   const obj = egbFeatures.podmiotyGrupowe.get(id);
@@ -38860,7 +38860,7 @@ function pokazPodmiotGrupowy(id) {
   }
 }
 
-// src/public/egib/wspolnoty-gruntowe.ts
+// public/egib/wspolnoty-gruntowe.ts
 function getWspolnotaGruntowaSkr(id) {
   let ret = "";
   const obj = egbFeatures.wspolnotyGruntowe.get(id);
@@ -38973,7 +38973,7 @@ function pokazWspolnoteGruntowa(id) {
   }
 }
 
-// src/public/egib/udzialy.ts
+// public/egib/udzialy.ts
 var EGB_GrupaRej = {
   "1": "skarb państwa",
   "2": "skarb państwa ZUW",
@@ -39633,7 +39633,7 @@ function getPrzedmiotSkr(id) {
   return ret;
 }
 
-// src/public/egib/budynki.ts
+// public/egib/budynki.ts
 var EGB_RodzajWgKST = {
   m: "mieszkalny",
   g: "produkcyjny, uslugowy i gospodarczy",
@@ -39888,7 +39888,7 @@ function pokazBudynek(id) {
   }
 }
 
-// src/public/map/obrys.ts
+// public/map/obrys.ts
 var EPS = 0.000000001;
 var MITER_LIMIT = 8;
 function getPolygons(geometry) {
@@ -40031,7 +40031,7 @@ function getObrysWewnetrzny(geometry, distance) {
   return result;
 }
 
-// src/public/map/schody.ts
+// public/map/schody.ts
 var STEP_SPACING = 0.5;
 var MAX_STEPS = 30;
 var EPS2 = 0.000000001;
@@ -40170,7 +40170,7 @@ function getSchodySteps(polygon, direction) {
   return result;
 }
 
-// src/public/map/wzory.ts
+// public/map/wzory.ts
 function getPolygons3(geometry) {
   if (!geometry) {
     return [];
@@ -40243,7 +40243,7 @@ function getKropkiWzoru(geometry, toScreen, toPosition, stepX, stepY) {
   return result;
 }
 
-// src/public/map/symbole.ts
+// public/map/symbole.ts
 var THIN = 1;
 var MEDIUM = 1.5;
 var THICK = 2.5;
@@ -40458,7 +40458,7 @@ function stylEtykiety(rodzaj) {
   }
 }
 
-// src/public/map/mapview.ts
+// public/map/mapview.ts
 import_proj43.default.defs([
   ["EPSG:2176", "+proj=tmerc +lat_0=0 +lon_0=15 +k=0.999923 +x_0=5500000 +y_0=0 +ellps=GRS80 +units=m +no_defs +type=crs +axis=neu"],
   ["EPSG:2177", "+proj=tmerc +lat_0=0 +lon_0=18 +k=0.999923 +x_0=6500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs +axis=neu"],
@@ -40489,6 +40489,44 @@ var mapGeometryLayers = [];
 var tableButton = import_leaflet.default.easyButton('<img src="./images/table-icon.png">', function() {
   document.getElementById("table-dialog")?.showModal();
 }, { position: "bottomright" });
+var backButton = import_leaflet.default.easyButton({
+  position: "bottomright",
+  id: "map-back-button",
+  states: [
+    {
+      stateName: "back",
+      icon: '<span class="map-back-arrow" aria-hidden="true">←</span>',
+      title: "Wróć do poprzedniego widoku",
+      onClick: () => returnFromMap()
+    }
+  ]
+});
+var backButtonAdded = false;
+function showMapBackButton() {
+  if (!backButtonAdded) {
+    backButton.addTo(map);
+    backButtonAdded = true;
+    backButton.getContainer()?.querySelector("button")?.setAttribute("aria-label", "Wróć do poprzedniego widoku");
+  }
+  const container = backButton.getContainer();
+  if (container) {
+    container.style.display = "";
+  }
+}
+function hideMapBackButton() {
+  const container = backButton.getContainer();
+  if (container) {
+    container.style.display = "none";
+  }
+}
+function isMapBackButtonVisible() {
+  const container = backButton.getContainer();
+  return !!container && container.style.display !== "none";
+}
+function returnFromMap() {
+  hideMapBackButton();
+  showModal();
+}
 var info = import_leaflet.default.control({ position: "bottomright" });
 function onEachFeature(feature, layer) {
   layers[feature.properties.id] = layer;
@@ -41654,7 +41692,7 @@ function getMapFeatureLabel(fId) {
   }
 }
 
-// src/public/egib/dokumenty.ts
+// public/egib/dokumenty.ts
 var EGB_RodzajDokumentu = {
   "1": "umowa, akt notarialny",
   "2": "akt własności ziemi",
@@ -41785,7 +41823,7 @@ function pokazDokument(id) {
   }
 }
 
-// src/public/egib/obreby-ewidencyjne.ts
+// public/egib/obreby-ewidencyjne.ts
 function getJE(obj) {
   let ret = "";
   if (obj.lokalizacjaObrebu == null) {
@@ -41862,7 +41900,7 @@ function pokazObrebEwidencyjny(id) {
   }
 }
 
-// src/public/egib/kontury-uzytku-gruntowego.ts
+// public/egib/kontury-uzytku-gruntowego.ts
 var EGB_OFU = {
   R: "grunt orny",
   S: "sad",
@@ -41973,7 +42011,7 @@ function pokazKonturUzytkugruntowego(id) {
   }
 }
 
-// src/public/egib/operaty.ts
+// public/egib/operaty.ts
 function getOperatTechniczny(id) {
   let ret = '<div class="padded bottom-dashed-line">';
   const obj = egbFeatures.operatyTechniczne.get(id);
@@ -42045,7 +42083,7 @@ function pokazOperat(id) {
   }
 }
 
-// src/public/egib/zmiany.ts
+// public/egib/zmiany.ts
 function getZmiana(id) {
   let ret = '<div class="padded bottom-dashed-line">';
   const obj = egbFeatures.zmiany.get(id);
@@ -42121,7 +42159,7 @@ function pokazZmiane(id) {
   }
 }
 
-// src/public/egib/dzialki-ewidencyjne.ts
+// public/egib/dzialki-ewidencyjne.ts
 var EGB_ZapisPowDzialki = {
   "1": "do m<sup>2</sup>",
   "2": "do ara"
@@ -42367,7 +42405,7 @@ function pokazDzialkeEwidencyjna(id) {
   }
 }
 
-// src/public/egib/jednostki-ewidencyjne.ts
+// public/egib/jednostki-ewidencyjne.ts
 function getIdJedonstki(obj) {
   let ret = '<div class="div-title">';
   ret += '<span class="item">Identyfikator jednostki ewidencyjnej: </span>';
@@ -42416,7 +42454,7 @@ function pokazJednostkeEwidencyjna(id) {
   }
 }
 
-// src/public/egib/JRB.ts
+// public/egib/JRB.ts
 function getIdLokalizacja(obj) {
   let ret = '<div class="div-title">';
   ret += '<span class="item">Identyfikator JRB: </span>';
@@ -42507,7 +42545,7 @@ function pokazJRB(id) {
   }
 }
 
-// src/public/egib/JRG.ts
+// public/egib/JRG.ts
 function getIdLokalizacja2(obj) {
   let ret = '<div class="div-title">';
   ret += '<span class="item">Identyfikator JRG: </span>';
@@ -42580,7 +42618,7 @@ function pokazJRG(id) {
   }
 }
 
-// src/public/egib/JRL.ts
+// public/egib/JRL.ts
 function getIdLokalizacja3(obj) {
   let ret = '<div class="div-title">';
   ret += '<span class="item">Identyfikator JRL: </span>';
@@ -42714,7 +42752,7 @@ function pokazJRL(id) {
   }
 }
 
-// src/public/egib/kontury-klasyfikacyjne.ts
+// public/egib/kontury-klasyfikacyjne.ts
 function getLokalizacja4(obj) {
   let ret = '<div class="div-title">';
   ret += '<span class="item">Identyfikator konturu klasyfikacyjnego: </span>';
@@ -42787,7 +42825,7 @@ function pokazKonturKlasyfikacyjny(id) {
   }
 }
 
-// src/public/egib/pomieszczenia-przynalezne-do-lokalu.ts
+// public/egib/pomieszczenia-przynalezne-do-lokalu.ts
 var EGB_RodzajPomieszczenia = {
   "1": "piwnica",
   "2": "garaż",
@@ -42859,7 +42897,7 @@ function pokazPomieszczeniePrzynalezne(id) {
   }
 }
 
-// src/public/egib/lokale.ts
+// public/egib/lokale.ts
 var EGB_RodzajLokalu = { "1": "mieszkalny", "2": "niemieszkalny" };
 function getIdLokalu(obj) {
   let ret = '<div class="div-title">';
@@ -43017,7 +43055,7 @@ function pokazLokal(id) {
   }
 }
 
-// src/public/egib/udzialy-we-wlasnosci.ts
+// public/egib/udzialy-we-wlasnosci.ts
 function getRodzaj2(obj) {
   let ret = '<div><span class="item">Rodzaj prawa: </span>';
   if (obj.rodzajPrawa) {
@@ -43114,7 +43152,7 @@ function pokazUdzialWeWlasnosci(id) {
   }
 }
 
-// src/public/egib/udzialy-we-wladaniu.ts
+// public/egib/udzialy-we-wladaniu.ts
 function getRodzaj3(obj) {
   let ret = '<div><span class="item">Rodzaj prawa: </span>';
   if (obj.rodzajWladania) {
@@ -43183,7 +43221,7 @@ function pokazUdzialWeWladaniu(id) {
   }
 }
 
-// src/public/egib/features.ts
+// public/egib/features.ts
 var egbFeatures = {
   dzialkiEwidencyjne: new Map,
   zmiany: new Map,
@@ -43587,7 +43625,7 @@ function showEgbFeatureOnMap() {
   sheetHighlightFeature("m" + idsStack.get());
 }
 
-// src/public/txml/txml.js
+// public/txml/txml.js
 function parse(S, options) {
   "txml";
   options = options || {};
@@ -43918,7 +43956,7 @@ function filter(children, f, dept = 0, path = "") {
 }
 var $parse = parse;
 
-// src/public/parsegml/egib-19-to-111.ts
+// public/parsegml/egib-19-to-111.ts
 var FEATURE_NAMES = {
   EGB_AdresZameldowania: "EGB_AdresPodmiotu",
   EGB_AdresStalegoPobytu: "EGB_AdresPodmiotu"
@@ -44190,10 +44228,10 @@ function convertEgib19Feature(feature) {
   return feature;
 }
 
-// src/public/table/table.ts
+// public/table/table.ts
 var import_clusterize = __toESM(require_clusterize());
 
-// src/public/table/blok-budynku.ts
+// public/table/blok-budynku.ts
 function tableGetRodzaj(obj) {
   let ret = "";
   if (obj.rodzajBloku) {
@@ -44240,7 +44278,7 @@ function tableBlokiBudynku() {
   return ret;
 }
 
-// src/public/table/budynek.ts
+// public/table/budynek.ts
 function tableGetId(obj) {
   return obj.idBudynku ? obj.idBudynku : "";
 }
@@ -44356,7 +44394,7 @@ function tableBudynki() {
   return ret;
 }
 
-// src/public/table/dzialka-ewidencyjna.ts
+// public/table/dzialka-ewidencyjna.ts
 function tableGetId2(obj) {
   return obj.idDzialki ? obj.idDzialki : "";
 }
@@ -44466,7 +44504,7 @@ function tableDziałkiEwidencyjne() {
   return ret;
 }
 
-// src/public/table/instytucja.ts
+// public/table/instytucja.ts
 function tableGetNazwa(obj) {
   return obj.nazwaPelna ? obj.nazwaPelna : "";
 }
@@ -44529,7 +44567,7 @@ function tableInstytucje() {
   return ret;
 }
 
-// src/public/table/jednostka-ewidencyjna.ts
+// public/table/jednostka-ewidencyjna.ts
 function tableGetIdJednostki(obj) {
   return obj.idJednostkiEwid ? obj.idJednostkiEwid : "";
 }
@@ -44575,7 +44613,7 @@ function tableJednostkiEwidencyjne() {
   return ret;
 }
 
-// src/public/table/JRB.ts
+// public/table/JRB.ts
 function tableGetId3(obj) {
   return obj.idJednostkiRejestrowej ? obj.idJednostkiRejestrowej : "";
 }
@@ -44646,7 +44684,7 @@ function tableJRB() {
   return ret;
 }
 
-// src/public/table/JRG.ts
+// public/table/JRG.ts
 function tableGetId4(obj) {
   return obj.idJednostkiRejestrowej ? obj.idJednostkiRejestrowej : "";
 }
@@ -44701,7 +44739,7 @@ function tableJRG() {
   return ret;
 }
 
-// src/public/table/JRL.ts
+// public/table/JRL.ts
 function tableGetId5(obj) {
   return obj.idJednostkiRejestrowej ? obj.idJednostkiRejestrowej : "";
 }
@@ -44805,7 +44843,7 @@ function tableJRL() {
   return ret;
 }
 
-// src/public/table/kontur-klasyfikacyjny.ts
+// public/table/kontur-klasyfikacyjny.ts
 function tableGetId6(obj) {
   return obj.idKonturu ? obj.idKonturu : "";
 }
@@ -44840,7 +44878,7 @@ function tableKonturyKlasyfikacyjne() {
   return ret;
 }
 
-// src/public/table/kontur-uzytku-gruntowego.ts
+// public/table/kontur-uzytku-gruntowego.ts
 function tableGetId7(obj) {
   return obj.idUzytku ? obj.idUzytku : "";
 }
@@ -44873,7 +44911,7 @@ function tableKonturyUzytkuGruntowego() {
   return ret;
 }
 
-// src/public/table/lokal.ts
+// public/table/lokal.ts
 function tableGetId8(obj) {
   return obj.idLokalu ? obj.idLokalu : "";
 }
@@ -44980,7 +45018,7 @@ function tableLokale() {
   return ret;
 }
 
-// src/public/table/malzenstwo.ts
+// public/table/malzenstwo.ts
 function tableGetOsoba2(obj) {
   let ret = "";
   if (obj.osobaFizyczna2) {
@@ -45027,7 +45065,7 @@ function tableMalzenstwa() {
   return ret;
 }
 
-// src/public/table/obiekt-trwale-zwiazany-z-budynkiem.ts
+// public/table/obiekt-trwale-zwiazany-z-budynkiem.ts
 function tableGetRodzaj2(obj) {
   let ret = "";
   if (obj.rodzajObiektuZwiazanegoZBudynkiem) {
@@ -45063,7 +45101,7 @@ function tableObiektyZwiazanyZBudynkiem() {
   return ret;
 }
 
-// src/public/table/obreb-ewidencyjny.ts
+// public/table/obreb-ewidencyjny.ts
 function tableGetIdObrebu(obj) {
   return obj.idObrebu ? obj.idObrebu : "";
 }
@@ -45122,7 +45160,7 @@ function tableObrebyEwidencyjne() {
   return ret;
 }
 
-// src/public/table/osoba-fizyczna.ts
+// public/table/osoba-fizyczna.ts
 function tableGetImieNazwisko(obj) {
   let ret = "";
   if (obj.pierwszeImie) {
@@ -45195,7 +45233,7 @@ function tableOsobyFizyczne() {
   return ret;
 }
 
-// src/public/table/pomieszczenie-przynalezne-do-lokalu.ts
+// public/table/pomieszczenie-przynalezne-do-lokalu.ts
 function tableGetRodzaj3(obj) {
   let ret = "";
   if (obj.rodzajPomieszczeniaPrzynaleznego) {
@@ -45239,7 +45277,7 @@ function tablePomieszczeniaPrzynależne() {
   return ret;
 }
 
-// src/public/table/punkt-graniczny.ts
+// public/table/punkt-graniczny.ts
 function tableGetId10(obj) {
   return obj.idPunktu ? obj.idPunktu : "";
 }
@@ -45305,7 +45343,7 @@ function tablePunktyGraniczne() {
   return ret;
 }
 
-// src/public/table/podmiot-grupowy.ts
+// public/table/podmiot-grupowy.ts
 function tableGetNazwa2(obj) {
   return obj.nazwaPelna ? obj.nazwaPelna : "";
 }
@@ -45386,7 +45424,7 @@ function tablePodmiotyGrupowe() {
   return ret;
 }
 
-// src/public/table/wspolnota-gruntowa.ts
+// public/table/wspolnota-gruntowa.ts
 function tableGetNazwa3(obj) {
   return obj.nazwa ? obj.nazwa : "";
 }
@@ -45479,7 +45517,7 @@ function tableWspolnotyGruntowe() {
   return ret;
 }
 
-// src/public/table/adres-nieruchomosci.ts
+// public/table/adres-nieruchomosci.ts
 function tableGetNazwaMiejscowosci(obj) {
   return obj.nazwaMiejscowosci ? obj.nazwaMiejscowosci : "";
 }
@@ -45519,7 +45557,7 @@ function tableAdresyNieruchomosci() {
   return ret;
 }
 
-// src/public/table/adres-podmiotu.ts
+// public/table/adres-podmiotu.ts
 function tableGetKraj(obj) {
   return obj.kraj ? obj.kraj : "";
 }
@@ -45567,7 +45605,7 @@ function tableAdresyPodmiotu() {
   return ret;
 }
 
-// src/public/table/operat.ts
+// public/table/operat.ts
 function tableGetDataSporzadzenia(obj) {
   return obj.dataSporzadzenia ? new Date(obj.dataSporzadzenia).toLocaleDateString("pl-PL") : "";
 }
@@ -45608,7 +45646,7 @@ function tableOperatyTechniczne() {
   return ret;
 }
 
-// src/public/table/zmiana.ts
+// public/table/zmiana.ts
 function tableGetDataPrzyjecia(obj) {
   return obj.dataPrzyjeciaZgloszeniaZmiany ? new Date(obj.dataPrzyjeciaZgloszeniaZmiany).toLocaleDateString("pl-PL") : "";
 }
@@ -45645,7 +45683,7 @@ function tableZmiany() {
   return ret;
 }
 
-// src/public/table/dokument.ts
+// public/table/dokument.ts
 function tableGetData(obj) {
   return obj.dataDokumentu ? new Date(obj.dataDokumentu).toLocaleDateString("pl-PL") : "";
 }
@@ -45701,7 +45739,7 @@ function tableDokumenty() {
   return ret;
 }
 
-// src/public/table/udzial-we-wlasnosci.ts
+// public/table/udzial-we-wlasnosci.ts
 function tableGetRodzajWlasnosci(obj) {
   let ret = "";
   if (obj.rodzajPrawa) {
@@ -45742,7 +45780,7 @@ function tableUdzialyWeWlasnosci() {
   return ret;
 }
 
-// src/public/table/udzial-we-wladaniu.ts
+// public/table/udzial-we-wladaniu.ts
 function tableGetRodzajWladania(obj) {
   let ret = "";
   if (obj.rodzajWladania) {
@@ -45783,7 +45821,7 @@ function tableUdzialyWeWladaniu() {
   return ret;
 }
 
-// src/public/table/table.ts
+// public/table/table.ts
 document.getElementById("table-filter").value = "";
 document.getElementById("table-filter-form").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -46244,10 +46282,10 @@ function tableGetWartoscUdzialu(obj) {
   return ret;
 }
 
-// node_modules/jspdf/dist/jspdf.es.min.js
+// ../node_modules/jspdf/dist/jspdf.es.min.js
 init_typeof();
 
-// node_modules/fflate/esm/browser.js
+// ../node_modules/fflate/esm/browser.js
 var u8 = Uint8Array;
 var u16 = Uint16Array;
 var i32 = Int32Array;
@@ -46712,13 +46750,13 @@ try {
   tds = 1;
 } catch (e) {}
 
-// node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+// ../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(r) {
   if (Array.isArray(r))
     return r;
 }
 
-// node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+// ../node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
 function _iterableToArrayLimit(r, l) {
   var t = r == null ? null : typeof Symbol != "undefined" && r[Symbol.iterator] || r["@@iterator"];
   if (t != null) {
@@ -46746,7 +46784,7 @@ function _iterableToArrayLimit(r, l) {
   }
 }
 
-// node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+// ../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
 function _arrayLikeToArray(r, a) {
   (a == null || a > r.length) && (a = r.length);
   for (var e = 0, n = Array(a);e < a; e++)
@@ -46754,7 +46792,7 @@ function _arrayLikeToArray(r, a) {
   return n;
 }
 
-// node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+// ../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
 function _unsupportedIterableToArray(r, a) {
   if (r) {
     if (typeof r == "string")
@@ -46764,18 +46802,18 @@ function _unsupportedIterableToArray(r, a) {
   }
 }
 
-// node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+// ../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
 function _nonIterableRest() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 
-// node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+// ../node_modules/@babel/runtime/helpers/esm/slicedToArray.js
 function _slicedToArray(r, e) {
   return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
 }
 
-// node_modules/iobuffer/lib-esm/text.js
+// ../node_modules/iobuffer/lib-esm/text.js
 function decode(bytes, encoding = "utf8") {
   const decoder = new TextDecoder(encoding);
   return decoder.decode(bytes);
@@ -46785,7 +46823,7 @@ function encode(str) {
   return encoder.encode(str);
 }
 
-// node_modules/iobuffer/lib-esm/IOBuffer.js
+// ../node_modules/iobuffer/lib-esm/IOBuffer.js
 var defaultByteLength = 1024 * 8;
 var hostBigEndian = (() => {
   const array = new Uint8Array(4);
@@ -47109,7 +47147,7 @@ class IOBuffer {
   }
 }
 
-// node_modules/pako/dist/pako.esm.mjs
+// ../node_modules/pako/dist/pako.esm.mjs
 /*! pako 2.2.0 https://github.com/nodeca/pako @license (MIT AND Zlib) */
 var Z_FIXED$1 = 4;
 var Z_BINARY = 0;
@@ -51198,7 +51236,7 @@ var { Inflate, inflate, inflateRaw, ungzip } = inflate_1$1;
 var Inflate_1 = Inflate;
 var inflate_1 = inflate;
 
-// node_modules/fast-png/lib-esm/helpers/crc.js
+// ../node_modules/fast-png/lib-esm/helpers/crc.js
 var crcTable2 = [];
 for (let n = 0;n < 256; n++) {
   let c = n;
@@ -51230,7 +51268,7 @@ function checkCrc(buffer, crcLength, chunkName) {
   }
 }
 
-// node_modules/fast-png/lib-esm/helpers/unfilter.js
+// ../node_modules/fast-png/lib-esm/helpers/unfilter.js
 function unfilterNone(currentLine, newLine, bytesPerLine) {
   for (let i = 0;i < bytesPerLine; i++) {
     newLine[i] = currentLine[i];
@@ -51306,7 +51344,7 @@ function paethPredictor(a, b, c) {
     return c;
 }
 
-// node_modules/fast-png/lib-esm/helpers/applyUnfilter.js
+// ../node_modules/fast-png/lib-esm/helpers/applyUnfilter.js
 function applyUnfilter(filterType, currentLine, newLine, prevLine, passLineBytes, bytesPerPixel) {
   switch (filterType) {
     case 0:
@@ -51329,7 +51367,7 @@ function applyUnfilter(filterType, currentLine, newLine, prevLine, passLineBytes
   }
 }
 
-// node_modules/fast-png/lib-esm/helpers/decodeInterlaceAdam7.js
+// ../node_modules/fast-png/lib-esm/helpers/decodeInterlaceAdam7.js
 var uint16 = new Uint16Array([255]);
 var uint8 = new Uint8Array(uint16.buffer);
 var osIsLittleEndian = uint8[0] === 255;
@@ -51389,7 +51427,7 @@ function swap16(val) {
   return (val & 255) << 8 | val >> 8 & 255;
 }
 
-// node_modules/fast-png/lib-esm/helpers/decodeInterlaceNull.js
+// ../node_modules/fast-png/lib-esm/helpers/decodeInterlaceNull.js
 var uint162 = new Uint16Array([255]);
 var uint82 = new Uint8Array(uint162.buffer);
 var osIsLittleEndian2 = uint82[0] === 255;
@@ -51444,7 +51482,7 @@ function swap162(val) {
   return (val & 255) << 8 | val >> 8 & 255;
 }
 
-// node_modules/fast-png/lib-esm/helpers/signature.js
+// ../node_modules/fast-png/lib-esm/helpers/signature.js
 var pngSignature = Uint8Array.of(137, 80, 78, 71, 13, 10, 26, 10);
 function checkSignature(buffer) {
   if (!hasPngSignature(buffer.readBytes(pngSignature.length))) {
@@ -51463,7 +51501,7 @@ function hasPngSignature(array) {
   return true;
 }
 
-// node_modules/fast-png/lib-esm/helpers/text.js
+// ../node_modules/fast-png/lib-esm/helpers/text.js
 var textChunkName = "tEXt";
 var NULL = 0;
 var latin1Decoder = new TextDecoder("latin1");
@@ -51497,7 +51535,7 @@ function readLatin1(buffer, length) {
   return latin1Decoder.decode(buffer.readBytes(length));
 }
 
-// node_modules/fast-png/lib-esm/internalTypes.js
+// ../node_modules/fast-png/lib-esm/internalTypes.js
 var ColorType = {
   UNKNOWN: -1,
   GREYSCALE: 0,
@@ -51529,7 +51567,7 @@ var BlendOpType = {
   OVER: 1
 };
 
-// node_modules/fast-png/lib-esm/PngDecoder.js
+// ../node_modules/fast-png/lib-esm/PngDecoder.js
 class PngDecoder extends IOBuffer {
   _checkCrc;
   _inflator;
@@ -51986,20 +52024,20 @@ function checkBitDepth(value) {
   }
   return value;
 }
-// node_modules/fast-png/lib-esm/types.js
+// ../node_modules/fast-png/lib-esm/types.js
 var ResolutionUnitSpecifier;
 (function(ResolutionUnitSpecifier) {
   ResolutionUnitSpecifier[ResolutionUnitSpecifier["UNKNOWN"] = 0] = "UNKNOWN";
   ResolutionUnitSpecifier[ResolutionUnitSpecifier["METRE"] = 1] = "METRE";
 })(ResolutionUnitSpecifier || (ResolutionUnitSpecifier = {}));
 
-// node_modules/fast-png/lib-esm/index.js
+// ../node_modules/fast-png/lib-esm/index.js
 function decodePng(data, options) {
   const decoder = new PngDecoder(data, options);
   return decoder.decode();
 }
 
-// node_modules/jspdf/dist/jspdf.es.min.js
+// ../node_modules/jspdf/dist/jspdf.es.min.js
 var i3 = function() {
   return typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this;
 }();
@@ -59994,7 +60032,7 @@ E.API.PDFObject = function() {
   }, e;
 }();
 
-// node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs
+// ../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.mjs
 var extendStatics = function(d, b) {
   extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d, b) {
     d.__proto__ = b;
@@ -61866,7 +61904,7 @@ try {
 var anyWindow;
 var jsPDF;
 
-// src/public/pdf/pdf.ts
+// public/pdf/pdf.ts
 function pdfGetOE(obj) {
   let ret = "";
   if (obj.idObrebu) {
@@ -62155,7 +62193,7 @@ Instytucje uprawnione: `;
   return ret;
 }
 
-// src/public/pdf/informacja-dla-dzialki.ts
+// public/pdf/informacja-dla-dzialki.ts
 function infoDlaDzialki(id) {
   const obj = egbFeatures.dzialkiEwidencyjne.get(id);
   if (obj) {
@@ -62379,7 +62417,7 @@ function pdfGetDokument(id) {
   return [data, rodzaj, tworca, sygnatura, oznaczenie, opis];
 }
 
-// src/public/pdf/informacja-z-JRG.ts
+// public/pdf/informacja-z-JRG.ts
 function infoDlaJRG(id) {
   const obj = egbFeatures.jednostkiRejestroweGruntow.get(id);
   if (obj) {
@@ -62596,7 +62634,7 @@ function pdfGetDzialkiBudynkiLokale(obj) {
   return { dzialki, budynki: [...new Set(budynki)], lokale: [...new Set(lokale)] };
 }
 
-// src/public/ui/ui.ts
+// public/ui/ui.ts
 function showOnMapButton() {
   const showOnMapButton = document.getElementById("show-on-map");
   showOnMapButton.style.visibility = "visible";
@@ -62618,6 +62656,7 @@ function showModal() {
   modal.style.display = "block";
 }
 function closeModal() {
+  hideMapBackButton();
   const modal = document.getElementById("modal");
   modal.style.display = "none";
 }
@@ -62625,6 +62664,9 @@ function setListeners() {
   let isProcessing = false;
   async function handleFile(f) {
     const uploadProgress = document.getElementById("upload-progress");
+    const openedFileName = document.getElementById("opened-file-name");
+    openedFileName.textContent = f.name;
+    openedFileName.title = f.name;
     uploadProgress.classList.remove("error");
     let bytesRead = 0;
     const stream = f.stream();
@@ -62715,6 +62757,14 @@ function setListeners() {
       isProcessing = false;
       return;
     }
+    const sourceVersion = pickEgibSourceVersion(versionHints);
+    if (sourceVersion && sourceVersion !== "1.11") {
+      uploadProgress.classList.add("converted");
+      uploadProgress.textContent = `Plik EGIB ${sourceVersion} został skonwertowany do formatu EGIB 1.11.`;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      uploadProgress.classList.remove("converted");
+      uploadProgress.textContent = "";
+    }
     uploadProgress.textContent = "Generowanie mapy...";
     await new Promise((resolve) => setTimeout(resolve, 10));
     generateSelectOptions();
@@ -62784,11 +62834,28 @@ function setListeners() {
     }
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !selectFeaturesMenu.hidden) {
+    if (e.key !== "Escape") {
+      return;
+    }
+    if (!selectFeaturesMenu.hidden) {
       e.preventDefault();
       e.stopPropagation();
       closeSelectFeatures();
       selectFeaturesToggle.focus();
+      return;
+    }
+    if (tableDialog.open || infoDialog.open) {
+      return;
+    }
+    const modal = document.getElementById("modal");
+    if (modal.style.display === "block") {
+      e.preventDefault();
+      closeModal();
+      return;
+    }
+    if (isMapBackButtonVisible()) {
+      e.preventDefault();
+      returnFromMap();
     }
   });
   const showTableButton = document.getElementById("show-table");
@@ -62821,6 +62888,7 @@ function setListeners() {
   showOnMapButton.addEventListener("click", () => {
     closeModal();
     showEgbFeatureOnMap();
+    showMapBackButton();
   });
   const pdfButton = document.getElementById("report");
   pdfButton.addEventListener("click", () => {
@@ -62874,5 +62942,5 @@ function setListeners() {
   });
 }
 
-// src/public/index.ts
+// public/index.ts
 setListeners();

@@ -7,6 +7,7 @@ import proj4 from "proj4";
 import "proj4leaflet";
 import "leaflet-easybutton";
 import { egbFeatures, htmlIDs, showEgbFeatureFromMap } from "../egib/features";
+import { showModal } from "../ui/ui";
 import { EGB_KodStabilizacji, EGB_SpelnienieWarunkowDokladnosciowych, EGB_SposobPozyskania } from "../egib/punkty-graniczne";
 import { EGB_RodzajObiektu } from "../egib/obiekty-trwale-zwiazane-z-budynkiem";
 import { EGB_RodzajBloku } from "../egib/bloki-budynku";
@@ -92,6 +93,54 @@ const tableButton = L.easyButton(
 	},
 	{ position: "bottomright" },
 );
+
+// Przycisk powrotu z mapy do widoku informacji. Dodawany jest do mapy dopiero
+// po użyciu przycisku „Pokaż na mapie”, więc domyślnie jest niewidoczny.
+const backButton = L.easyButton({
+	position: "bottomright",
+	id: "map-back-button",
+	states: [
+		{
+			stateName: "back",
+			icon: '<span class="map-back-arrow" aria-hidden="true">←</span>',
+			title: "Wróć do poprzedniego widoku",
+			onClick: () => returnFromMap(),
+		},
+	],
+});
+
+let backButtonAdded = false;
+
+export function showMapBackButton() {
+	if (!backButtonAdded) {
+		// EasyButton wstawia kontrolki w prawym dolnym rogu na początek
+		// kontenera, więc dodany później przycisk znajdzie się nad tabelą.
+		backButton.addTo(map);
+		backButtonAdded = true;
+		backButton.getContainer()?.querySelector("button")?.setAttribute("aria-label", "Wróć do poprzedniego widoku");
+	}
+	const container = backButton.getContainer();
+	if (container) {
+		container.style.display = "";
+	}
+}
+
+export function hideMapBackButton() {
+	const container = backButton.getContainer();
+	if (container) {
+		container.style.display = "none";
+	}
+}
+
+export function isMapBackButtonVisible() {
+	const container = backButton.getContainer();
+	return !!container && container.style.display !== "none";
+}
+
+export function returnFromMap() {
+	hideMapBackButton();
+	showModal();
+}
 
 const info = L.control({ position: "bottomright" });
 

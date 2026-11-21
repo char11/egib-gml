@@ -34,7 +34,7 @@ export function getAdresPodmiotuSkr(id: string) {
 			ret += "/" + obj.numerLokalu;
 		}
 	} else {
-		ret += '<span class="error-inline">Brak adresu zameldowanie o podanym gml id</span>';
+		ret += '<span class="error-inline">Brak adresu podmiotu o podanym gml id</span>';
 	}
 	return ret;
 }
@@ -86,7 +86,7 @@ export function pokazAdresPodmiotu(id: string) {
 	if (obj) {
 		const wrapper = document.getElementById("main-wrapper");
 		if (wrapper) {
-			let html = '<div class="div-title"><span class="item">Adres zameldowania: </span></div>';
+			let html = '<div class="div-title"><span class="item">Adres podmiotu: </span></div>';
 			html += '<div class="grid-container">';
 			html += getOgolnyObiekt(obj);
 			html += getAdres(obj);

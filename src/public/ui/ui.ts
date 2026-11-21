@@ -9,7 +9,7 @@ import {
 	type Egib19ConversionProblem,
 	type EgibSourceVersion,
 } from "../parsegml/egib-19-to-111.js";
-import { showMap } from "../map/mapview.js";
+import { showMap, showMapBackButton, hideMapBackButton, isMapBackButtonVisible, returnFromMap } from "../map/mapview.js";
 import { generateSelectOptions } from "../table/table.js";
 import { infoDlaDzialki } from "../pdf/informacja-dla-dzialki.js";
 import { infoDlaJRG } from "../pdf/informacja-z-JRG.js";
@@ -40,6 +40,9 @@ export function showModal() {
 }
 
 export function closeModal() {
+	// Zamknięcie widoku szczegółowego przyciskiem X kończy powrót z mapy,
+	// więc przycisk powrotu nie powinien pozostawać widoczny.
+	hideMapBackButton();
 	const modal = document.getElementById("modal") as HTMLDialogElement;
 	modal.style.display = "none";
 }
@@ -49,6 +52,9 @@ export function setListeners() {
 
 	async function handleFile(f: File) {
 		const uploadProgress = document.getElementById("upload-progress") as HTMLDivElement;
+		const openedFileName = document.getElementById("opened-file-name") as HTMLDivElement;
+		openedFileName.textContent = f.name;
+		openedFileName.title = f.name;
 		uploadProgress.classList.remove("error");
 		let bytesRead = 0;
 		const stream = f.stream();
@@ -163,6 +169,17 @@ export function setListeners() {
 			return;
 		}
 
+		// Informacja o konwersji starszego schematu (1.6-1.9) do 1.11.
+		// Pokazujemy ją jeszcze przed mapą, bo mapa zasłania ten obszar.
+		const sourceVersion = pickEgibSourceVersion(versionHints);
+		if (sourceVersion && sourceVersion !== "1.11") {
+			uploadProgress.classList.add("converted");
+			uploadProgress.textContent = `Plik EGIB ${sourceVersion} został skonwertowany do formatu EGIB 1.11.`;
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			uploadProgress.classList.remove("converted");
+			uploadProgress.textContent = "";
+		}
+
 		uploadProgress.textContent = "Generowanie mapy...";
 		await new Promise((resolve) => setTimeout(resolve, 10));
 
@@ -242,11 +259,32 @@ export function setListeners() {
 	});
 
 	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape" && !selectFeaturesMenu.hidden) {
+		if (e.key !== "Escape") {
+			return;
+		}
+		// Rozwinięty select w tabeli zamykamy jako pierwszy.
+		if (!selectFeaturesMenu.hidden) {
 			e.preventDefault();
 			e.stopPropagation();
 			closeSelectFeatures();
 			selectFeaturesToggle.focus();
+			return;
+		}
+		// Natywne dialogi (tabela, informacje) obsługują Escape same.
+		if (tableDialog.open || infoDialog.open) {
+			return;
+		}
+		// Escape działa jak przycisk X w widoku szczegółowym.
+		const modal = document.getElementById("modal") as HTMLElement;
+		if (modal.style.display === "block") {
+			e.preventDefault();
+			closeModal();
+			return;
+		}
+		// Na mapie Escape działa jak przycisk powrotu.
+		if (isMapBackButtonVisible()) {
+			e.preventDefault();
+			returnFromMap();
 		}
 	});
 
@@ -288,6 +326,7 @@ export function setListeners() {
 	showOnMapButton.addEventListener("click", () => {
 		closeModal();
 		showEgbFeatureOnMap();
+		showMapBackButton();
 	});
 
 	const pdfButton = document.getElementById("report") as HTMLInputElement;
