@@ -4,6 +4,7 @@ import { getInstytucjaSkr } from "./instytucje";
 import { EGB_StatusPodmiotuEwid } from "./udzialy";
 import { getMalzenstwoSkr } from "./malzenstwa";
 import { getOsobaSkr } from "./osoby-fizyczne";
+import { showReportButton } from "../ui/ui";
 
 export function getWspolnotaGruntowaSkr(id: string) {
 	let ret = "";
@@ -153,6 +154,7 @@ function getOsobyMalzenstwaInstytucje(obj: EGB_WspolnotaGruntowaType) {
 export function pokazWspolnoteGruntowa(id: string) {
 	const obj = egbFeatures.wspolnotyGruntowe.get(id);
 	if (obj) {
+		showReportButton();
 		const wrapper = document.getElementById("main-wrapper");
 		if (wrapper) {
 			let html = '<div class="div-title"><span class="item">Wspólnota gruntowa: </span></div>';

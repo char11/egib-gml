@@ -37980,17 +37980,19 @@ function getStartKoniecObiektu(obj) {
   ret += "</div>";
   return ret;
 }
+function sortRefs(obj, getLabel, descending = false) {
+  const refs = [...Array.isArray(obj) ? obj : [obj]].filter((ref) => ref != null);
+  refs.sort((a, b) => {
+    const result = getLabel(a._attributes.href).localeCompare(getLabel(b._attributes.href), "pl");
+    return descending ? -result : result;
+  });
+  return refs;
+}
 function getDokumenty(obj) {
   let ret = "";
-  if (Array.isArray(obj)) {
-    obj.forEach((key) => {
-      if (key) {
-        ret += getEGBDokumenty(key._attributes.href);
-      }
-    });
-  } else {
-    ret += getEGBDokumenty(obj._attributes.href);
-  }
+  sortRefs(obj, (id) => egbFeatures.dokumenty.get(id)?.sygnaturaDokumentu ?? "", true).forEach((key) => {
+    ret += getEGBDokumenty(key._attributes.href);
+  });
   return ret;
 }
 function getEGBDokumenty(id) {
@@ -38011,15 +38013,9 @@ function getEGBDokumenty(id) {
 }
 function getOperaty(obj) {
   let ret = "";
-  if (Array.isArray(obj)) {
-    obj.forEach((key) => {
-      if (key) {
-        ret += getEGBOperaty(key._attributes.href);
-      }
-    });
-  } else {
-    ret += getEGBOperaty(obj._attributes.href);
-  }
+  sortRefs(obj, (id) => egbFeatures.operatyTechniczne.get(id)?.identyfikatorOperatuWgPZGIK ?? "", true).forEach((key) => {
+    ret += getEGBOperaty(key._attributes.href);
+  });
   return ret;
 }
 function getEGBOperaty(id) {
@@ -38178,6 +38174,9 @@ function getIdBudynku(id) {
     ret += '<span class="error-inline">Brak budynku o podanym gml id</span>';
   }
   return ret;
+}
+function sortPunktyGraniczne(refs) {
+  return sortRefs(refs, (id) => egbFeatures.punktyGraniczne.get(id)?.idPunktu ?? "");
 }
 function getIdPunktuGranicznego(id) {
   let ret = "";
@@ -38564,6 +38563,7 @@ function getAdresy(obj) {
 function pokazOsobeFizyczna(id) {
   const obj = egbFeatures.osobyFizyczne.get(id);
   if (obj) {
+    showReportButton();
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
       let html = '<div class="div-title"><span class="item">Osoba fizyczna: </span></div>';
@@ -38650,6 +38650,7 @@ function getZarzad(obj) {
 function pokazInstytucje(id) {
   const obj = egbFeatures.instytucje.get(id);
   if (obj) {
+    showReportButton();
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
       let html = '<div class="div-title"><span class="item">Instytucja: </span></div>';
@@ -38725,6 +38726,7 @@ function getStatus(obj) {
 function pokazMalzenstwo(id) {
   const obj = egbFeatures.malzenstwa.get(id);
   if (obj) {
+    showReportButton();
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
       let html = '<div class="div-title"><span class="item">Małżeństwo: </span></div>';
@@ -38845,6 +38847,7 @@ function getSklad(obj) {
 function pokazPodmiotGrupowy(id) {
   const obj = egbFeatures.podmiotyGrupowe.get(id);
   if (obj) {
+    showReportButton();
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
       let html = '<div class="div-title"><span class="item">Podmiot grupowy: </span></div>';
@@ -38958,6 +38961,7 @@ function getOsobyMalzenstwaInstytucje(obj) {
 function pokazWspolnoteGruntowa(id) {
   const obj = egbFeatures.wspolnotyGruntowe.get(id);
   if (obj) {
+    showReportButton();
     const wrapper = document.getElementById("main-wrapper");
     if (wrapper) {
       let html = '<div class="div-title"><span class="item">Wspólnota gruntowa: </span></div>';
@@ -41870,10 +41874,8 @@ function getPunktyGraniczne(obj) {
   } else if (obj.punktGranicyObrebu.length < 3) {
     ret += '<div class="error-inline">Za mała liczba punktów granicznych</div>';
   } else {
-    obj.punktGranicyObrebu.forEach((key) => {
-      if (key) {
-        ret += getIdPunktuGranicznego(key._attributes.href);
-      }
+    sortPunktyGraniczne(obj.punktGranicyObrebu).forEach((key) => {
+      ret += getIdPunktuGranicznego(key._attributes.href);
     });
   }
   ret += "</div></div>";
@@ -42291,10 +42293,8 @@ function getPunktyGraniczne2(obj) {
   } else if (obj.punktGranicyDzialki.length < 3) {
     ret += '<div class="error">Za mała liczba punktów granicznych</div>';
   } else {
-    obj.punktGranicyDzialki.forEach((key) => {
-      if (key) {
-        ret += getIdPunktuGranicznego(key._attributes.href);
-      }
+    sortPunktyGraniczne(obj.punktGranicyDzialki).forEach((key) => {
+      ret += getIdPunktuGranicznego(key._attributes.href);
     });
   }
   ret += "</div></div>";
@@ -42424,10 +42424,8 @@ function getPunktyGraniczne3(obj) {
   } else if (obj.punktGranicyJednEwid.length < 3) {
     ret += '<div class="error-inline">Za mała liczba punktów granicznych</div>';
   } else {
-    obj.punktGranicyJednEwid.forEach((key) => {
-      if (key) {
-        ret += getIdPunktuGranicznego(key._attributes.href);
-      }
+    sortPunktyGraniczne(obj.punktGranicyJednEwid).forEach((key) => {
+      ret += getIdPunktuGranicznego(key._attributes.href);
     });
   }
   ret += "</div></div>";
@@ -62634,6 +62632,247 @@ function pdfGetDzialkiBudynkiLokale(obj) {
   return { dzialki, budynki: [...new Set(budynki)], lokale: [...new Set(lokale)] };
 }
 
+// public/pdf/posiadanie.ts
+var kindOrder = {
+  JRG: 0,
+  JRB: 1,
+  JRL: 2
+};
+function posiadanieDlaOsobyFizycznej(id) {
+  const obj = egbFeatures.osobyFizyczne.get(id);
+  if (obj) {
+    const dane = [["Podmiot:", pdfGetOsobaNazwa(obj)]];
+    dane.push(["Adres zameldowania:", pdfGetOsobaAdres(obj, "adresZameldowania")]);
+    dane.push(["Adres stałego pobytu:", pdfGetOsobaAdres(obj, "adresStalegoPobytu")]);
+    posiadaniePdf(id, dane, "posiadanie - osoba fizyczna.pdf");
+  }
+}
+function posiadanieDlaMalzenstwa(id) {
+  const obj = egbFeatures.malzenstwa.get(id);
+  if (obj) {
+    const osoby = pdfGetOsoby(obj.osobaFizyczna2, obj.osobaFizyczna3);
+    const dane = [["Podmiot:", osoby.map((osoba) => pdfGetOsobaNazwa(osoba)).join(", ")]];
+    dane.push(["Adres zameldowania:", pdfJoinAdresy(osoby.map((osoba) => pdfGetOsobaAdres(osoba, "adresZameldowania")))]);
+    dane.push(["Adres stałego pobytu:", pdfJoinAdresy(osoby.map((osoba) => pdfGetOsobaAdres(osoba, "adresStalegoPobytu")))]);
+    posiadaniePdf(id, dane, "posiadanie - małżeństwo.pdf");
+  }
+}
+function posiadanieDlaInstytucji(id) {
+  const obj = egbFeatures.instytucje.get(id);
+  if (obj) {
+    posiadaniePdf(id, pdfGetPodmiotDane(obj.nazwaPelna, obj.nazwaSkrocona, obj.regon, obj.adresSiedziby), "posiadanie - instytucja.pdf");
+  }
+}
+function posiadanieDlaPodmiotuGrupowego(id) {
+  const obj = egbFeatures.podmiotyGrupowe.get(id);
+  if (obj) {
+    posiadaniePdf(id, pdfGetPodmiotDane(obj.nazwaPelna, obj.nazwaSkrocona, obj.regon, obj.adresSiedziby), "posiadanie - podmiot grupowy.pdf");
+  }
+}
+function posiadanieDlaWspolnotyGruntowej(id) {
+  const obj = egbFeatures.wspolnotyGruntowe.get(id);
+  if (obj) {
+    const dane = [["Podmiot:", obj.nazwa ?? ""]];
+    if (obj.spolkaZarzadajaca) {
+      dane.push(["Spółka zarządzająca:", pdfGetInstytucjaNazwa(obj.spolkaZarzadajaca._attributes.href)]);
+    }
+    posiadaniePdf(id, dane, "posiadanie - wspólnota gruntowa.pdf");
+  }
+}
+function posiadaniePdf(id, dane, fileName) {
+  const doc = new E("p", "mm", "a4");
+  doc.addFont("fonts/Lato-Regular.ttf", "sans", "normal");
+  doc.setFont("sans", "normal");
+  const pageWidth = doc.internal.pageSize.getWidth();
+  doc.setFontSize(16);
+  doc.text("Posiadanie", pageWidth / 2, 10, { align: "center" });
+  doc.setFontSize(10);
+  autoTable(doc, {
+    body: dane,
+    styles: {
+      font: "sans",
+      fontStyle: "normal",
+      fontSize: 10,
+      cellPadding: { bottom: 1 }
+    },
+    theme: "plain",
+    columnStyles: {
+      0: { cellWidth: 42 }
+    }
+  });
+  doc.text("Nieruchomości:", 14, doc.lastAutoTable.finalY + 5);
+  autoTable(doc, {
+    head: [["Przedmiot", "Udział", "Rodzaj prawa", "Nieruchomości"]],
+    body: pdfGetPosiadanie(id),
+    startY: doc.lastAutoTable.finalY + 6,
+    styles: {
+      font: "sans",
+      fontStyle: "normal",
+      fontSize: 10,
+      cellPadding: 0.5
+    },
+    columnStyles: {
+      0: { cellWidth: 47 },
+      1: { cellWidth: 16 },
+      2: { cellWidth: 31 }
+    },
+    headStyles: { fillColor: [80, 80, 80] }
+  });
+  addFooters(doc);
+  doc.save(fileName);
+}
+function addFooters(doc) {
+  const pageCount = doc.getNumberOfPages();
+  const pageSize = doc.internal.pageSize;
+  const pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+  doc.setFontSize(8);
+  for (let i = 1;i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.text("Strona " + String(i) + " z " + String(pageCount), doc.internal.pageSize.getWidth() / 2, pageHeight - 8, { align: "center" });
+  }
+}
+function pdfGetOsobaNazwa(obj) {
+  const imiona = [obj.pierwszeImie, obj.drugieImie].filter(Boolean).join(" ");
+  const nazwiska = [obj.pierwszyCzlonNazwiska, obj.drugiCzlonNazwiska].filter(Boolean).join("-");
+  let ret = (nazwiska + " " + imiona).trim();
+  const rodzice = [obj.imieOjca, obj.imieMatki].filter(Boolean).join(" ");
+  if (rodzice) {
+    ret += " (" + rodzice + ")";
+  }
+  return ret;
+}
+function pdfGetOsoby(...refs) {
+  const ret = [];
+  for (const ref of refs) {
+    const obj = ref ? egbFeatures.osobyFizyczne.get(ref._attributes.href) : undefined;
+    if (obj) {
+      ret.push(obj);
+    }
+  }
+  return ret;
+}
+function pdfGetOsobaAdres(obj, pole) {
+  const ref = obj[pole];
+  return ref ? tableGetAdresPodmiotu(ref._attributes.href) : "";
+}
+function pdfJoinAdresy(adresy) {
+  return [...new Set(adresy.filter(Boolean))].join(`
+`);
+}
+function pdfGetPodmiotDane(nazwaPelna, nazwaSkrocona, regon, adresSiedziby) {
+  const dane = [["Podmiot:", nazwaPelna ?? nazwaSkrocona ?? ""]];
+  if (nazwaPelna && nazwaSkrocona) {
+    dane.push(["Nazwa skrócona:", nazwaSkrocona]);
+  }
+  if (regon) {
+    dane.push(["Regon:", regon]);
+  }
+  dane.push(["Adres siedziby:", adresSiedziby ? tableGetAdresPodmiotu(adresSiedziby._attributes.href) : ""]);
+  return dane;
+}
+function pdfGetInstytucjaNazwa(id) {
+  const obj = egbFeatures.instytucje.get(id);
+  return obj?.nazwaPelna ?? "";
+}
+function pdfGetPosiadanie(id) {
+  const rows = [];
+  for (const obj of egbFeatures.udzialyWeWlasnosci.values()) {
+    if (obj.podmiotUdzialuWlasnosci?._attributes?.href !== id) {
+      continue;
+    }
+    const przedmiot = obj.przedmiotUdzialuWlasnosci?._attributes?.href;
+    if (!przedmiot) {
+      continue;
+    }
+    const row = pdfGetPosiadanieRow(przedmiot, tableGetWartoscUdzialu(obj), pdfGetPrawo(obj.rodzajPrawa, EGB_RodzajPrawa));
+    if (row) {
+      rows.push(row);
+    }
+  }
+  for (const obj of egbFeatures.udzialyWeWladaniu.values()) {
+    if (obj.podmiotUdzialuWeWladaniu?._attributes?.href !== id) {
+      continue;
+    }
+    const przedmiot = obj.przedmiotUdzialuWladania?._attributes?.href;
+    if (!przedmiot) {
+      continue;
+    }
+    const row = pdfGetPosiadanieRow(przedmiot, tableGetWartoscUdzialu(obj), pdfGetPrawo(obj.rodzajWladania, EGB_RodzajWladania));
+    if (row) {
+      rows.push(row);
+    }
+  }
+  rows.sort((a, b) => kindOrder[a.kind] - kindOrder[b.kind] || a.id.localeCompare(b.id, "pl") || a.prawo.localeCompare(b.prawo, "pl"));
+  return rows.map((row) => [row.id, row.udzial, row.prawo, row.nieruchomosci.join(`
+`)]);
+}
+function pdfGetPosiadanieRow(przedmiot, udzial, prawo) {
+  const jrg = egbFeatures.jednostkiRejestroweGruntow.get(przedmiot);
+  if (jrg) {
+    return {
+      kind: "JRG",
+      id: jrg.idJednostkiRejestrowej ?? "",
+      udzial,
+      prawo,
+      nieruchomosci: pdfGetDzialki(przedmiot)
+    };
+  }
+  const jrb = egbFeatures.jednostkiRejestroweBudynkow.get(przedmiot);
+  if (jrb) {
+    return {
+      kind: "JRB",
+      id: jrb.idJednostkiRejestrowej ?? "",
+      udzial,
+      prawo,
+      nieruchomosci: pdfGetBudynki(przedmiot)
+    };
+  }
+  const jrl = egbFeatures.jednostkiRejestroweLokali.get(przedmiot);
+  if (jrl) {
+    return {
+      kind: "JRL",
+      id: jrl.idJednostkiRejestrowej ?? "",
+      udzial,
+      prawo,
+      nieruchomosci: pdfGetLokale(przedmiot)
+    };
+  }
+  return null;
+}
+function pdfGetPrawo(kod, slownik) {
+  if (!kod) {
+    return "";
+  }
+  return slownik[kod] ?? "";
+}
+function pdfGetDzialki(id) {
+  const ret = [];
+  for (const obj of egbFeatures.dzialkiEwidencyjne.values()) {
+    if (obj.JRG2?._attributes?.href === id && obj.idDzialki) {
+      ret.push(obj.idDzialki);
+    }
+  }
+  return [...new Set(ret)].sort((a, b) => a.localeCompare(b, "pl"));
+}
+function pdfGetBudynki(id) {
+  const ret = [];
+  for (const obj of egbFeatures.budynki.values()) {
+    if (obj.JRBdlaBudynku?._attributes?.href === id && obj.idBudynku) {
+      ret.push(obj.idBudynku);
+    }
+  }
+  return [...new Set(ret)].sort((a, b) => a.localeCompare(b, "pl"));
+}
+function pdfGetLokale(id) {
+  const ret = [];
+  for (const obj of egbFeatures.lokaleSamodzielne.values()) {
+    if (obj.JRdlaLokalu?._attributes?.href === id && obj.idLokalu) {
+      ret.push(obj.idLokalu);
+    }
+  }
+  return [...new Set(ret)].sort((a, b) => a.localeCompare(b, "pl"));
+}
+
 // public/ui/ui.ts
 function showOnMapButton() {
   const showOnMapButton = document.getElementById("show-on-map");
@@ -62898,6 +63137,16 @@ function setListeners() {
       infoDlaDzialki(id);
     } else if (feature === "rg") {
       infoDlaJRG(id);
+    } else if (feature === "of" /* iOsobaFizyczna */) {
+      posiadanieDlaOsobyFizycznej(id);
+    } else if (feature === "ma" /* iMalzenstwo */) {
+      posiadanieDlaMalzenstwa(id);
+    } else if (feature === "in" /* iInstytucja */) {
+      posiadanieDlaInstytucji(id);
+    } else if (feature === "pd" /* iPodmiotGrupowy */) {
+      posiadanieDlaPodmiotuGrupowego(id);
+    } else if (feature === "wg" /* iWspolnotaGruntowa */) {
+      posiadanieDlaWspolnotyGruntowej(id);
     }
   });
   const fileInput = document.getElementById("file-input");

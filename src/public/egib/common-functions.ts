@@ -97,17 +97,20 @@ export function getStartKoniecObiektu(obj: EGB_OgolnyObiektType) {
 	return ret;
 }
 
+function sortRefs(obj: XlinkType | XlinkType[], getLabel: (id: string) => string, descending = false) {
+	const refs = [...(Array.isArray(obj) ? obj : [obj])].filter((ref): ref is XlinkType => ref != null);
+	refs.sort((a, b) => {
+		const result = getLabel(a._attributes.href).localeCompare(getLabel(b._attributes.href), "pl");
+		return descending ? -result : result;
+	});
+	return refs;
+}
+
 export function getDokumenty(obj: XlinkType | XlinkType[]) {
 	let ret = "";
-	if (Array.isArray(obj)) {
-		obj.forEach((key) => {
-			if (key) {
-				ret += getEGBDokumenty(key._attributes.href);
-			}
-		});
-	} else {
-		ret += getEGBDokumenty(obj._attributes.href);
-	}
+	sortRefs(obj, (id) => egbFeatures.dokumenty.get(id)?.sygnaturaDokumentu ?? "", true).forEach((key) => {
+		ret += getEGBDokumenty(key._attributes.href);
+	});
 	return ret;
 }
 
@@ -130,15 +133,9 @@ function getEGBDokumenty(id: string) {
 
 export function getOperaty(obj: XlinkType | XlinkType[]) {
 	let ret = "";
-	if (Array.isArray(obj)) {
-		obj.forEach((key) => {
-			if (key) {
-				ret += getEGBOperaty(key._attributes.href);
-			}
-		});
-	} else {
-		ret += getEGBOperaty(obj._attributes.href);
-	}
+	sortRefs(obj, (id) => egbFeatures.operatyTechniczne.get(id)?.identyfikatorOperatuWgPZGIK ?? "", true).forEach((key) => {
+		ret += getEGBOperaty(key._attributes.href);
+	});
 	return ret;
 }
 
@@ -340,6 +337,10 @@ export function getIdBudynku(id: string) {
 		ret += '<span class="error-inline">Brak budynku o podanym gml id</span>';
 	}
 	return ret;
+}
+
+export function sortPunktyGraniczne(refs: XlinkType[]) {
+	return sortRefs(refs, (id) => egbFeatures.punktyGraniczne.get(id)?.idPunktu ?? "");
 }
 
 export function getIdPunktuGranicznego(id: string) {

@@ -2,6 +2,7 @@ import { getAdresPodmiotuSkr } from "./adresy-podmiotu";
 import { getOgolnyObiekt } from "./common-functions";
 import { egbFeatures, htmlIDs } from "./features";
 import { EGB_StatusPodmiotuEwid } from "./udzialy";
+import { showReportButton } from "../ui/ui";
 
 export const EGB_Plec: { [key: string]: string } = {
 	"1": "męska", // 1
@@ -145,6 +146,7 @@ function getAdresy(obj: EGB_OsobaFizycznaType) {
 export function pokazOsobeFizyczna(id: string) {
 	const obj = egbFeatures.osobyFizyczne.get(id);
 	if (obj) {
+		showReportButton();
 		const wrapper = document.getElementById("main-wrapper");
 		if (wrapper) {
 			let html = '<div class="div-title"><span class="item">Osoba fizyczna: </span></div>';

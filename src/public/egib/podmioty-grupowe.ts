@@ -4,6 +4,7 @@ import { getInstytucjaSkr } from "./instytucje";
 import { EGB_StatusPodmiotuEwid } from "./udzialy";
 import { getMalzenstwoSkr } from "./malzenstwa";
 import { getOsobaSkr } from "./osoby-fizyczne";
+import { showReportButton } from "../ui/ui";
 
 export function getPodmiotGrupowySkr(id: string) {
 	let ret = "";
@@ -150,6 +151,7 @@ function getSklad(obj: EGB_PodmiotGrupowyType) {
 export function pokazPodmiotGrupowy(id: string) {
 	const obj = egbFeatures.podmiotyGrupowe.get(id);
 	if (obj) {
+		showReportButton();
 		const wrapper = document.getElementById("main-wrapper");
 		if (wrapper) {
 			let html = '<div class="div-title"><span class="item">Podmiot grupowy: </span></div>';

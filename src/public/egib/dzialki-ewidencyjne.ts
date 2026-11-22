@@ -1,6 +1,6 @@
 import { showOnMapButton, showReportButton } from "../ui/ui";
 import { getLokaleIds } from "./budynki";
-import { getAdresNieruchomosci, getArea, getDokWlasnosciKW, getIdPunktuGranicznego, getOgolnyObiekt } from "./common-functions";
+import { getAdresNieruchomosci, getArea, getDokWlasnosciKW, getIdPunktuGranicznego, getOgolnyObiekt, sortPunktyGraniczne } from "./common-functions";
 import { getDokument } from "./dokumenty";
 import { egbFeatures, htmlIDs } from "./features";
 import { getWlasnosciWladania } from "./udzialy";
@@ -170,10 +170,8 @@ function getPunktyGraniczne(obj: EGB_DzialkaEwidencyjnaType) {
 	} else if (obj.punktGranicyDzialki.length < 3) {
 		ret += '<div class="error">Za mała liczba punktów granicznych</div>';
 	} else {
-		obj.punktGranicyDzialki.forEach((key) => {
-			if (key) {
-				ret += getIdPunktuGranicznego(key._attributes.href);
-			}
+		sortPunktyGraniczne(obj.punktGranicyDzialki).forEach((key) => {
+			ret += getIdPunktuGranicznego(key._attributes.href);
 		});
 	}
 	ret += "</div></div>";

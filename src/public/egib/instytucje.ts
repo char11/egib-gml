@@ -2,6 +2,7 @@ import { getAdresSiedziby, getOgolnyObiekt } from "./common-functions";
 import { egbFeatures, htmlIDs } from "./features";
 import { EGB_StatusPodmiotuEwid } from "./udzialy";
 import { getOsobaSkr } from "./osoby-fizyczne";
+import { showReportButton } from "../ui/ui";
 
 export function getInstytucjaSkr(id: string) {
 	let ret = "";
@@ -88,6 +89,7 @@ function getZarzad(obj: EGB_InstytucjaType) {
 export function pokazInstytucje(id: string) {
 	const obj = egbFeatures.instytucje.get(id);
 	if (obj) {
+		showReportButton();
 		const wrapper = document.getElementById("main-wrapper");
 		if (wrapper) {
 			let html = '<div class="div-title"><span class="item">Instytucja: </span></div>';

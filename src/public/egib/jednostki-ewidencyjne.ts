@@ -1,5 +1,5 @@
 import { showOnMapButton } from "../ui/ui";
-import { getIdPunktuGranicznego, getNazwe, getOgolnyObiekt } from "./common-functions";
+import { getIdPunktuGranicznego, getNazwe, getOgolnyObiekt, sortPunktyGraniczne } from "./common-functions";
 import { egbFeatures } from "./features";
 
 function getIdJedonstki(obj: EGB_JednostkaEwidencyjnaType) {
@@ -24,10 +24,8 @@ function getPunktyGraniczne(obj: EGB_JednostkaEwidencyjnaType) {
 	} else if (obj.punktGranicyJednEwid.length < 3) {
 		ret += '<div class="error-inline">Za mała liczba punktów granicznych</div>';
 	} else {
-		obj.punktGranicyJednEwid.forEach((key) => {
-			if (key) {
-				ret += getIdPunktuGranicznego(key._attributes.href);
-			}
+		sortPunktyGraniczne(obj.punktGranicyJednEwid).forEach((key) => {
+			ret += getIdPunktuGranicznego(key._attributes.href);
 		});
 	}
 	ret += "</div></div>";

@@ -1,4 +1,4 @@
-import { idsStack, showEgbFeatureOnMap, showEgbNextFeature, showEgbPrevFeature } from "../egib/features";
+import { htmlIDs, idsStack, showEgbFeatureOnMap, showEgbNextFeature, showEgbPrevFeature } from "../egib/features";
 import * as txml from "../txml/txml.js";
 import { checkFeature } from "../egib/features.js";
 import {
@@ -13,6 +13,13 @@ import { showMap, showMapBackButton, hideMapBackButton, isMapBackButtonVisible, 
 import { generateSelectOptions } from "../table/table.js";
 import { infoDlaDzialki } from "../pdf/informacja-dla-dzialki.js";
 import { infoDlaJRG } from "../pdf/informacja-z-JRG.js";
+import {
+	posiadanieDlaInstytucji,
+	posiadanieDlaMalzenstwa,
+	posiadanieDlaOsobyFizycznej,
+	posiadanieDlaPodmiotuGrupowego,
+	posiadanieDlaWspolnotyGruntowej,
+} from "../pdf/posiadanie.js";
 
 export function showOnMapButton() {
 	const showOnMapButton = document.getElementById("show-on-map") as HTMLInputElement;
@@ -337,6 +344,16 @@ export function setListeners() {
 			infoDlaDzialki(id);
 		} else if (feature === "rg") {
 			infoDlaJRG(id);
+		} else if (feature === htmlIDs.iOsobaFizyczna) {
+			posiadanieDlaOsobyFizycznej(id);
+		} else if (feature === htmlIDs.iMalzenstwo) {
+			posiadanieDlaMalzenstwa(id);
+		} else if (feature === htmlIDs.iInstytucja) {
+			posiadanieDlaInstytucji(id);
+		} else if (feature === htmlIDs.iPodmiotGrupowy) {
+			posiadanieDlaPodmiotuGrupowego(id);
+		} else if (feature === htmlIDs.iWspolnotaGruntowa) {
+			posiadanieDlaWspolnotyGruntowej(id);
 		}
 	});
 
